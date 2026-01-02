@@ -116,15 +116,15 @@ class NotificationHelper(private val context: Context) {
         )
 
         val notification = NotificationCompat.Builder(context, CHANNEL_ID_COMPLETION)
-            .setContentTitle(context.getString(R.string.notification_timer_complete_title))
-            .setContentText(context.getString(R.string.notification_timer_complete_text))
-            .setSmallIcon(android.R.drawable.ic_lock_silent_mode_off)
-            .setAutoCancel(true)
-            .setContentIntent(openPendingIntent)
-            .setCategory(NotificationCompat.CATEGORY_ALARM)
+            .setSmallIcon(R.mipmap.ic_launcher) // Use mipmap for better compatibility
+            .setContentTitle("Timer Complete")
+            .setContentText("All sounds have been restored.")
             .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setCategory(NotificationCompat.CATEGORY_ALARM)
+            .setVibrate(longArrayOf(0, 500, 200, 500))
+            .setAutoCancel(true)
             .build()
-
+        
         notificationManager.notify(NOTIFICATION_ID_COMPLETION, notification)
     }
 

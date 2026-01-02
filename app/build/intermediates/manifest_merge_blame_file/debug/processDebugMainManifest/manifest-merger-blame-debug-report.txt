@@ -75,157 +75,158 @@
 46-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:31:9-54
 47        android:supportsRtl="true"
 47-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:32:9-35
-48        android:theme="@style/Theme.SoundTimer" >
-48-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:33:9-48
-49
-50        <!-- Main Activity -->
-51        <activity
-51-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:37:9-45:20
-52            android:name="com.soundtimer.MainActivity"
-52-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:38:13-41
-53            android:exported="true"
-53-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:39:13-36
-54            android:theme="@style/Theme.SoundTimer" >
-54-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:40:13-52
-55            <intent-filter>
-55-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:41:13-44:29
-56                <action android:name="android.intent.action.MAIN" />
-56-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:42:17-69
-56-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:42:25-66
-57
-58                <category android:name="android.intent.category.LAUNCHER" />
-58-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:43:17-77
-58-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:43:27-74
-59            </intent-filter>
-60        </activity>
-61
-62        <!-- Timer Foreground Service -->
-63        <service
-63-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:48:9-56:19
-64            android:name="com.soundtimer.service.TimerService"
-64-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:49:13-49
-65            android:enabled="true"
-65-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:50:13-35
-66            android:exported="false"
-66-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:51:13-37
-67            android:foregroundServiceType="specialUse" >
-67-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:52:13-55
-68            <property
-68-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:53:13-55:41
-69                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
-69-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:54:17-76
-70                android:value="timer" />
-70-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:55:17-38
-71        </service>
-72
-73        <!-- Boot Completed Receiver -->
-74        <receiver
-74-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:59:9-67:20
-75            android:name="com.soundtimer.service.BootReceiver"
-75-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:60:13-49
-76            android:enabled="true"
-76-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:61:13-35
-77            android:exported="true" >
-77-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:62:13-36
-78            <intent-filter>
-78-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:63:13-66:29
-79                <action android:name="android.intent.action.BOOT_COMPLETED" />
-79-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:64:17-79
-79-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:64:25-76
-80                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
-80-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:65:17-82
-80-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:65:25-79
-81            </intent-filter>
-82        </receiver>
-83
-84        <!-- Alarm Receiver -->
-85        <receiver
-85-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:70:9-73:40
-86            android:name="com.soundtimer.service.AlarmReceiver"
-86-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:71:13-50
-87            android:enabled="true"
-87-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:72:13-35
-88            android:exported="false" />
-88-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:73:13-37
-89
-90        <activity
-90-->[androidx.compose.ui:ui-test-manifest:1.6.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\e417b445a02d92bfd74ce6ce0c709fb0\transformed\ui-test-manifest-1.6.0\AndroidManifest.xml:23:9-25:39
-91            android:name="androidx.activity.ComponentActivity"
-91-->[androidx.compose.ui:ui-test-manifest:1.6.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\e417b445a02d92bfd74ce6ce0c709fb0\transformed\ui-test-manifest-1.6.0\AndroidManifest.xml:24:13-63
-92            android:exported="true" />
-92-->[androidx.compose.ui:ui-test-manifest:1.6.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\e417b445a02d92bfd74ce6ce0c709fb0\transformed\ui-test-manifest-1.6.0\AndroidManifest.xml:25:13-36
-93        <activity
-93-->[androidx.compose.ui:ui-tooling-android:1.6.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\084f5876c33bb82d3211cbee202ee2e3\transformed\ui-tooling-release\AndroidManifest.xml:23:9-25:39
-94            android:name="androidx.compose.ui.tooling.PreviewActivity"
-94-->[androidx.compose.ui:ui-tooling-android:1.6.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\084f5876c33bb82d3211cbee202ee2e3\transformed\ui-tooling-release\AndroidManifest.xml:24:13-71
-95            android:exported="true" />
-95-->[androidx.compose.ui:ui-tooling-android:1.6.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\084f5876c33bb82d3211cbee202ee2e3\transformed\ui-tooling-release\AndroidManifest.xml:25:13-36
-96
-97        <provider
-97-->[androidx.emoji2:emoji2:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\21ebc02265ca89794d5a42abdd064bce\transformed\emoji2-1.3.0\AndroidManifest.xml:24:9-32:20
-98            android:name="androidx.startup.InitializationProvider"
-98-->[androidx.emoji2:emoji2:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\21ebc02265ca89794d5a42abdd064bce\transformed\emoji2-1.3.0\AndroidManifest.xml:25:13-67
-99            android:authorities="com.soundtimer.androidx-startup"
-99-->[androidx.emoji2:emoji2:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\21ebc02265ca89794d5a42abdd064bce\transformed\emoji2-1.3.0\AndroidManifest.xml:26:13-68
-100            android:exported="false" >
-100-->[androidx.emoji2:emoji2:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\21ebc02265ca89794d5a42abdd064bce\transformed\emoji2-1.3.0\AndroidManifest.xml:27:13-37
-101            <meta-data
-101-->[androidx.emoji2:emoji2:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\21ebc02265ca89794d5a42abdd064bce\transformed\emoji2-1.3.0\AndroidManifest.xml:29:13-31:52
-102                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-102-->[androidx.emoji2:emoji2:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\21ebc02265ca89794d5a42abdd064bce\transformed\emoji2-1.3.0\AndroidManifest.xml:30:17-75
-103                android:value="androidx.startup" />
-103-->[androidx.emoji2:emoji2:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\21ebc02265ca89794d5a42abdd064bce\transformed\emoji2-1.3.0\AndroidManifest.xml:31:17-49
-104            <meta-data
-104-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\22bcffecc94525513ecd4f360f34b898\transformed\lifecycle-process-2.7.0\AndroidManifest.xml:29:13-31:52
-105                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-105-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\22bcffecc94525513ecd4f360f34b898\transformed\lifecycle-process-2.7.0\AndroidManifest.xml:30:17-78
-106                android:value="androidx.startup" />
-106-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\22bcffecc94525513ecd4f360f34b898\transformed\lifecycle-process-2.7.0\AndroidManifest.xml:31:17-49
-107            <meta-data
-107-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\ea30ab8e81e344a46b1f2198f776a362\transformed\profileinstaller-1.3.0\AndroidManifest.xml:29:13-31:52
-108                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
-108-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\ea30ab8e81e344a46b1f2198f776a362\transformed\profileinstaller-1.3.0\AndroidManifest.xml:30:17-85
-109                android:value="androidx.startup" />
-109-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\ea30ab8e81e344a46b1f2198f776a362\transformed\profileinstaller-1.3.0\AndroidManifest.xml:31:17-49
-110        </provider>
-111
-112        <receiver
-112-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\ea30ab8e81e344a46b1f2198f776a362\transformed\profileinstaller-1.3.0\AndroidManifest.xml:34:9-52:20
-113            android:name="androidx.profileinstaller.ProfileInstallReceiver"
-113-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\ea30ab8e81e344a46b1f2198f776a362\transformed\profileinstaller-1.3.0\AndroidManifest.xml:35:13-76
-114            android:directBootAware="false"
-114-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\ea30ab8e81e344a46b1f2198f776a362\transformed\profileinstaller-1.3.0\AndroidManifest.xml:36:13-44
-115            android:enabled="true"
-115-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\ea30ab8e81e344a46b1f2198f776a362\transformed\profileinstaller-1.3.0\AndroidManifest.xml:37:13-35
-116            android:exported="true"
-116-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\ea30ab8e81e344a46b1f2198f776a362\transformed\profileinstaller-1.3.0\AndroidManifest.xml:38:13-36
-117            android:permission="android.permission.DUMP" >
-117-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\ea30ab8e81e344a46b1f2198f776a362\transformed\profileinstaller-1.3.0\AndroidManifest.xml:39:13-57
-118            <intent-filter>
-118-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\ea30ab8e81e344a46b1f2198f776a362\transformed\profileinstaller-1.3.0\AndroidManifest.xml:40:13-42:29
-119                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
-119-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\ea30ab8e81e344a46b1f2198f776a362\transformed\profileinstaller-1.3.0\AndroidManifest.xml:41:17-91
-119-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\ea30ab8e81e344a46b1f2198f776a362\transformed\profileinstaller-1.3.0\AndroidManifest.xml:41:25-88
-120            </intent-filter>
-121            <intent-filter>
-121-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\ea30ab8e81e344a46b1f2198f776a362\transformed\profileinstaller-1.3.0\AndroidManifest.xml:43:13-45:29
-122                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
-122-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\ea30ab8e81e344a46b1f2198f776a362\transformed\profileinstaller-1.3.0\AndroidManifest.xml:44:17-85
-122-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\ea30ab8e81e344a46b1f2198f776a362\transformed\profileinstaller-1.3.0\AndroidManifest.xml:44:25-82
-123            </intent-filter>
-124            <intent-filter>
-124-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\ea30ab8e81e344a46b1f2198f776a362\transformed\profileinstaller-1.3.0\AndroidManifest.xml:46:13-48:29
-125                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
-125-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\ea30ab8e81e344a46b1f2198f776a362\transformed\profileinstaller-1.3.0\AndroidManifest.xml:47:17-88
-125-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\ea30ab8e81e344a46b1f2198f776a362\transformed\profileinstaller-1.3.0\AndroidManifest.xml:47:25-85
-126            </intent-filter>
-127            <intent-filter>
-127-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\ea30ab8e81e344a46b1f2198f776a362\transformed\profileinstaller-1.3.0\AndroidManifest.xml:49:13-51:29
-128                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
-128-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\ea30ab8e81e344a46b1f2198f776a362\transformed\profileinstaller-1.3.0\AndroidManifest.xml:50:17-95
-128-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\ea30ab8e81e344a46b1f2198f776a362\transformed\profileinstaller-1.3.0\AndroidManifest.xml:50:25-92
-129            </intent-filter>
-130        </receiver>
-131    </application>
-132
-133</manifest>
+48        android:testOnly="true"
+49        android:theme="@style/Theme.SoundTimer" >
+49-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:33:9-48
+50
+51        <!-- Main Activity -->
+52        <activity
+52-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:37:9-45:20
+53            android:name="com.soundtimer.MainActivity"
+53-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:38:13-41
+54            android:exported="true"
+54-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:39:13-36
+55            android:theme="@style/Theme.SoundTimer" >
+55-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:40:13-52
+56            <intent-filter>
+56-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:41:13-44:29
+57                <action android:name="android.intent.action.MAIN" />
+57-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:42:17-69
+57-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:42:25-66
+58
+59                <category android:name="android.intent.category.LAUNCHER" />
+59-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:43:17-77
+59-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:43:27-74
+60            </intent-filter>
+61        </activity>
+62
+63        <!-- Timer Foreground Service -->
+64        <service
+64-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:48:9-56:19
+65            android:name="com.soundtimer.service.TimerService"
+65-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:49:13-49
+66            android:enabled="true"
+66-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:50:13-35
+67            android:exported="false"
+67-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:51:13-37
+68            android:foregroundServiceType="specialUse" >
+68-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:52:13-55
+69            <property
+69-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:53:13-55:41
+70                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+70-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:54:17-76
+71                android:value="timer" />
+71-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:55:17-38
+72        </service>
+73
+74        <!-- Boot Completed Receiver -->
+75        <receiver
+75-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:59:9-67:20
+76            android:name="com.soundtimer.service.BootReceiver"
+76-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:60:13-49
+77            android:enabled="true"
+77-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:61:13-35
+78            android:exported="true" >
+78-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:62:13-36
+79            <intent-filter>
+79-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:63:13-66:29
+80                <action android:name="android.intent.action.BOOT_COMPLETED" />
+80-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:64:17-79
+80-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:64:25-76
+81                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+81-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:65:17-82
+81-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:65:25-79
+82            </intent-filter>
+83        </receiver>
+84
+85        <!-- Alarm Receiver -->
+86        <receiver
+86-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:70:9-73:40
+87            android:name="com.soundtimer.service.AlarmReceiver"
+87-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:71:13-50
+88            android:enabled="true"
+88-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:72:13-35
+89            android:exported="false" />
+89-->C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\AndroidManifest.xml:73:13-37
+90
+91        <activity
+91-->[androidx.compose.ui:ui-test-manifest:1.6.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\e417b445a02d92bfd74ce6ce0c709fb0\transformed\ui-test-manifest-1.6.0\AndroidManifest.xml:23:9-25:39
+92            android:name="androidx.activity.ComponentActivity"
+92-->[androidx.compose.ui:ui-test-manifest:1.6.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\e417b445a02d92bfd74ce6ce0c709fb0\transformed\ui-test-manifest-1.6.0\AndroidManifest.xml:24:13-63
+93            android:exported="true" />
+93-->[androidx.compose.ui:ui-test-manifest:1.6.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\e417b445a02d92bfd74ce6ce0c709fb0\transformed\ui-test-manifest-1.6.0\AndroidManifest.xml:25:13-36
+94        <activity
+94-->[androidx.compose.ui:ui-tooling-android:1.6.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\084f5876c33bb82d3211cbee202ee2e3\transformed\ui-tooling-release\AndroidManifest.xml:23:9-25:39
+95            android:name="androidx.compose.ui.tooling.PreviewActivity"
+95-->[androidx.compose.ui:ui-tooling-android:1.6.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\084f5876c33bb82d3211cbee202ee2e3\transformed\ui-tooling-release\AndroidManifest.xml:24:13-71
+96            android:exported="true" />
+96-->[androidx.compose.ui:ui-tooling-android:1.6.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\084f5876c33bb82d3211cbee202ee2e3\transformed\ui-tooling-release\AndroidManifest.xml:25:13-36
+97
+98        <provider
+98-->[androidx.emoji2:emoji2:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\21ebc02265ca89794d5a42abdd064bce\transformed\emoji2-1.3.0\AndroidManifest.xml:24:9-32:20
+99            android:name="androidx.startup.InitializationProvider"
+99-->[androidx.emoji2:emoji2:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\21ebc02265ca89794d5a42abdd064bce\transformed\emoji2-1.3.0\AndroidManifest.xml:25:13-67
+100            android:authorities="com.soundtimer.androidx-startup"
+100-->[androidx.emoji2:emoji2:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\21ebc02265ca89794d5a42abdd064bce\transformed\emoji2-1.3.0\AndroidManifest.xml:26:13-68
+101            android:exported="false" >
+101-->[androidx.emoji2:emoji2:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\21ebc02265ca89794d5a42abdd064bce\transformed\emoji2-1.3.0\AndroidManifest.xml:27:13-37
+102            <meta-data
+102-->[androidx.emoji2:emoji2:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\21ebc02265ca89794d5a42abdd064bce\transformed\emoji2-1.3.0\AndroidManifest.xml:29:13-31:52
+103                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+103-->[androidx.emoji2:emoji2:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\21ebc02265ca89794d5a42abdd064bce\transformed\emoji2-1.3.0\AndroidManifest.xml:30:17-75
+104                android:value="androidx.startup" />
+104-->[androidx.emoji2:emoji2:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\21ebc02265ca89794d5a42abdd064bce\transformed\emoji2-1.3.0\AndroidManifest.xml:31:17-49
+105            <meta-data
+105-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\22bcffecc94525513ecd4f360f34b898\transformed\lifecycle-process-2.7.0\AndroidManifest.xml:29:13-31:52
+106                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+106-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\22bcffecc94525513ecd4f360f34b898\transformed\lifecycle-process-2.7.0\AndroidManifest.xml:30:17-78
+107                android:value="androidx.startup" />
+107-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\22bcffecc94525513ecd4f360f34b898\transformed\lifecycle-process-2.7.0\AndroidManifest.xml:31:17-49
+108            <meta-data
+108-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\ea30ab8e81e344a46b1f2198f776a362\transformed\profileinstaller-1.3.0\AndroidManifest.xml:29:13-31:52
+109                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+109-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\ea30ab8e81e344a46b1f2198f776a362\transformed\profileinstaller-1.3.0\AndroidManifest.xml:30:17-85
+110                android:value="androidx.startup" />
+110-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\ea30ab8e81e344a46b1f2198f776a362\transformed\profileinstaller-1.3.0\AndroidManifest.xml:31:17-49
+111        </provider>
+112
+113        <receiver
+113-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\ea30ab8e81e344a46b1f2198f776a362\transformed\profileinstaller-1.3.0\AndroidManifest.xml:34:9-52:20
+114            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+114-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\ea30ab8e81e344a46b1f2198f776a362\transformed\profileinstaller-1.3.0\AndroidManifest.xml:35:13-76
+115            android:directBootAware="false"
+115-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\ea30ab8e81e344a46b1f2198f776a362\transformed\profileinstaller-1.3.0\AndroidManifest.xml:36:13-44
+116            android:enabled="true"
+116-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\ea30ab8e81e344a46b1f2198f776a362\transformed\profileinstaller-1.3.0\AndroidManifest.xml:37:13-35
+117            android:exported="true"
+117-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\ea30ab8e81e344a46b1f2198f776a362\transformed\profileinstaller-1.3.0\AndroidManifest.xml:38:13-36
+118            android:permission="android.permission.DUMP" >
+118-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\ea30ab8e81e344a46b1f2198f776a362\transformed\profileinstaller-1.3.0\AndroidManifest.xml:39:13-57
+119            <intent-filter>
+119-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\ea30ab8e81e344a46b1f2198f776a362\transformed\profileinstaller-1.3.0\AndroidManifest.xml:40:13-42:29
+120                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+120-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\ea30ab8e81e344a46b1f2198f776a362\transformed\profileinstaller-1.3.0\AndroidManifest.xml:41:17-91
+120-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\ea30ab8e81e344a46b1f2198f776a362\transformed\profileinstaller-1.3.0\AndroidManifest.xml:41:25-88
+121            </intent-filter>
+122            <intent-filter>
+122-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\ea30ab8e81e344a46b1f2198f776a362\transformed\profileinstaller-1.3.0\AndroidManifest.xml:43:13-45:29
+123                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+123-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\ea30ab8e81e344a46b1f2198f776a362\transformed\profileinstaller-1.3.0\AndroidManifest.xml:44:17-85
+123-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\ea30ab8e81e344a46b1f2198f776a362\transformed\profileinstaller-1.3.0\AndroidManifest.xml:44:25-82
+124            </intent-filter>
+125            <intent-filter>
+125-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\ea30ab8e81e344a46b1f2198f776a362\transformed\profileinstaller-1.3.0\AndroidManifest.xml:46:13-48:29
+126                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+126-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\ea30ab8e81e344a46b1f2198f776a362\transformed\profileinstaller-1.3.0\AndroidManifest.xml:47:17-88
+126-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\ea30ab8e81e344a46b1f2198f776a362\transformed\profileinstaller-1.3.0\AndroidManifest.xml:47:25-85
+127            </intent-filter>
+128            <intent-filter>
+128-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\ea30ab8e81e344a46b1f2198f776a362\transformed\profileinstaller-1.3.0\AndroidManifest.xml:49:13-51:29
+129                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+129-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\ea30ab8e81e344a46b1f2198f776a362\transformed\profileinstaller-1.3.0\AndroidManifest.xml:50:17-95
+129-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\bigfu\.gradle\caches\8.13\transforms\ea30ab8e81e344a46b1f2198f776a362\transformed\profileinstaller-1.3.0\AndroidManifest.xml:50:25-92
+130            </intent-filter>
+131        </receiver>
+132    </application>
+133
+134</manifest>

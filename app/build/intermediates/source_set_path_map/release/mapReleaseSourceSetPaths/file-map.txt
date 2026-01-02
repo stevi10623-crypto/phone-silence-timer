@@ -1,0 +1,47 @@
+com.soundtimer.app-resValues-0 C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\build\generated\res\resValues\release
+com.soundtimer.app-updated_navigation_xml-1 C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\build\generated\updated_navigation_xml\release
+com.soundtimer.app-packageReleaseResources-2 C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\build\intermediates\incremental\release\packageReleaseResources\merged.dir
+com.soundtimer.app-packageReleaseResources-3 C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\build\intermediates\incremental\release\packageReleaseResources\stripped.dir
+com.soundtimer.app-release-4 C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\build\intermediates\merged_res\release\mergeReleaseResources
+com.soundtimer.app-main-5 C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\main\res
+com.soundtimer.app-release-6 C:\Users\bigfu\.gemini\antigravity\in-process\Phone Silence Timer\app\src\release\res
+com.soundtimer.app-animation-core-release-7 C:\Users\bigfu\.gradle\caches\8.13\transforms\06b9d0e1ef7a457d368074552f1bfa95\transformed\animation-core-release\res
+com.soundtimer.app-ui-geometry-release-8 C:\Users\bigfu\.gradle\caches\8.13\transforms\12f145c301ad571f7055775e4cd64bb4\transformed\ui-geometry-release\res
+com.soundtimer.app-emoji2-1.3.0-9 C:\Users\bigfu\.gradle\caches\8.13\transforms\21ebc02265ca89794d5a42abdd064bce\transformed\emoji2-1.3.0\res
+com.soundtimer.app-lifecycle-process-2.7.0-10 C:\Users\bigfu\.gradle\caches\8.13\transforms\22bcffecc94525513ecd4f360f34b898\transformed\lifecycle-process-2.7.0\res
+com.soundtimer.app-lifecycle-runtime-2.7.0-11 C:\Users\bigfu\.gradle\caches\8.13\transforms\29dcc0f1d0af0f939f742d95f7fb3bc0\transformed\lifecycle-runtime-2.7.0\res
+com.soundtimer.app-ui-tooling-preview-release-12 C:\Users\bigfu\.gradle\caches\8.13\transforms\2ecd9dc168ff804a7675e1616e352a95\transformed\ui-tooling-preview-release\res
+com.soundtimer.app-ui-release-13 C:\Users\bigfu\.gradle\caches\8.13\transforms\351036e94434b5af4480da73f132a4f0\transformed\ui-release\res
+com.soundtimer.app-lifecycle-viewmodel-2.7.0-14 C:\Users\bigfu\.gradle\caches\8.13\transforms\36e7f172c2d4ba4887ba3b7be470e675\transformed\lifecycle-viewmodel-2.7.0\res
+com.soundtimer.app-savedstate-1.2.1-15 C:\Users\bigfu\.gradle\caches\8.13\transforms\37043b8c18e73bee005868d89e0832ce\transformed\savedstate-1.2.1\res
+com.soundtimer.app-runtime-release-16 C:\Users\bigfu\.gradle\caches\8.13\transforms\41b85c300072684f8b15fbe2bec746f5\transformed\runtime-release\res
+com.soundtimer.app-material-icons-core-release-17 C:\Users\bigfu\.gradle\caches\8.13\transforms\47847cc79317cf8a115a00b2ceff0a66\transformed\material-icons-core-release\res
+com.soundtimer.app-lifecycle-livedata-core-2.7.0-18 C:\Users\bigfu\.gradle\caches\8.13\transforms\4bdbcb54103cbc742dd862cd3aaf1f0f\transformed\lifecycle-livedata-core-2.7.0\res
+com.soundtimer.app-ui-text-release-19 C:\Users\bigfu\.gradle\caches\8.13\transforms\556e14a41f4789fbc5831e196a883e60\transformed\ui-text-release\res
+com.soundtimer.app-foundation-release-20 C:\Users\bigfu\.gradle\caches\8.13\transforms\57dfce79318deaeab54039051e5497e7\transformed\foundation-release\res
+com.soundtimer.app-core-1.12.0-21 C:\Users\bigfu\.gradle\caches\8.13\transforms\588f541e696055c79e4c9c1867521cfd\transformed\core-1.12.0\res
+com.soundtimer.app-ui-graphics-release-22 C:\Users\bigfu\.gradle\caches\8.13\transforms\619afc72bbfe358fd47253044cf82d59\transformed\ui-graphics-release\res
+com.soundtimer.app-material-ripple-release-23 C:\Users\bigfu\.gradle\caches\8.13\transforms\62d5608627e7dee41c5c1c02adaf3e07\transformed\material-ripple-release\res
+com.soundtimer.app-core-runtime-2.2.0-24 C:\Users\bigfu\.gradle\caches\8.13\transforms\694bff509ac45bac1a6f35dee924a0a1\transformed\core-runtime-2.2.0\res
+com.soundtimer.app-lifecycle-runtime-ktx-2.7.0-25 C:\Users\bigfu\.gradle\caches\8.13\transforms\6d42ba20246f77140ca67d851613000a\transformed\lifecycle-runtime-ktx-2.7.0\res
+com.soundtimer.app-lifecycle-viewmodel-compose-2.7.0-26 C:\Users\bigfu\.gradle\caches\8.13\transforms\6f101bcd06edb4e8a7b9e142152c288b\transformed\lifecycle-viewmodel-compose-2.7.0\res
+com.soundtimer.app-core-ktx-1.12.0-27 C:\Users\bigfu\.gradle\caches\8.13\transforms\70697b4b51ee63750f4f3ee9fac01fd4\transformed\core-ktx-1.12.0\res
+com.soundtimer.app-animation-release-28 C:\Users\bigfu\.gradle\caches\8.13\transforms\7b906fd9d850d9fa28e06e4b8399cac1\transformed\animation-release\res
+com.soundtimer.app-lifecycle-viewmodel-savedstate-2.7.0-29 C:\Users\bigfu\.gradle\caches\8.13\transforms\833afcfcfba45f208404dccb0aa8cddf\transformed\lifecycle-viewmodel-savedstate-2.7.0\res
+com.soundtimer.app-datastore-1.0.0-30 C:\Users\bigfu\.gradle\caches\8.13\transforms\9564dc39bb160aa229ff1b3f2df2d426\transformed\datastore-1.0.0\res
+com.soundtimer.app-activity-compose-1.8.2-31 C:\Users\bigfu\.gradle\caches\8.13\transforms\9e87851c48a23ba082bc2e7de8acd95c\transformed\activity-compose-1.8.2\res
+com.soundtimer.app-material3-1.1.2-32 C:\Users\bigfu\.gradle\caches\8.13\transforms\a1059e11c04fc30131525620004c2394\transformed\material3-1.1.2\res
+com.soundtimer.app-runtime-saveable-release-33 C:\Users\bigfu\.gradle\caches\8.13\transforms\a8a03710475e2c899133562855878d08\transformed\runtime-saveable-release\res
+com.soundtimer.app-datastore-preferences-1.0.0-34 C:\Users\bigfu\.gradle\caches\8.13\transforms\aeb925f2ddf78c90c1f791a9f5959f14\transformed\datastore-preferences-1.0.0\res
+com.soundtimer.app-activity-1.8.2-35 C:\Users\bigfu\.gradle\caches\8.13\transforms\b58a2840caedb65c4fab6749f49bfc88\transformed\activity-1.8.2\res
+com.soundtimer.app-ui-unit-release-36 C:\Users\bigfu\.gradle\caches\8.13\transforms\bcd9d81db1f2334e5761cf79849b6d72\transformed\ui-unit-release\res
+com.soundtimer.app-customview-poolingcontainer-1.0.0-37 C:\Users\bigfu\.gradle\caches\8.13\transforms\c11c65b4f60801bcb6b715533a0ee1d3\transformed\customview-poolingcontainer-1.0.0\res
+com.soundtimer.app-startup-runtime-1.1.1-38 C:\Users\bigfu\.gradle\caches\8.13\transforms\c1912c453fd510c4c014cd1dd6566d0f\transformed\startup-runtime-1.1.1\res
+com.soundtimer.app-ui-util-release-39 C:\Users\bigfu\.gradle\caches\8.13\transforms\c32b4bba91aac9db1379aa2f520a8b60\transformed\ui-util-release\res
+com.soundtimer.app-lifecycle-viewmodel-ktx-2.7.0-40 C:\Users\bigfu\.gradle\caches\8.13\transforms\c5a6dae4199fbc5ef0610ae6d0c5e1f3\transformed\lifecycle-viewmodel-ktx-2.7.0\res
+com.soundtimer.app-activity-ktx-1.8.2-41 C:\Users\bigfu\.gradle\caches\8.13\transforms\d5b238ea7d5908d5e8c06c1d40e77a01\transformed\activity-ktx-1.8.2\res
+com.soundtimer.app-savedstate-ktx-1.2.1-42 C:\Users\bigfu\.gradle\caches\8.13\transforms\d615f221a94d91ab144618a77d0e99f1\transformed\savedstate-ktx-1.2.1\res
+com.soundtimer.app-annotation-experimental-1.3.0-43 C:\Users\bigfu\.gradle\caches\8.13\transforms\e86832963980e3964416196ce393cf09\transformed\annotation-experimental-1.3.0\res
+com.soundtimer.app-profileinstaller-1.3.0-44 C:\Users\bigfu\.gradle\caches\8.13\transforms\ea30ab8e81e344a46b1f2198f776a362\transformed\profileinstaller-1.3.0\res
+com.soundtimer.app-material-icons-extended-release-45 C:\Users\bigfu\.gradle\caches\8.13\transforms\f875f8fe2ae2525caf13cccff5ac82eb\transformed\material-icons-extended-release\res
+com.soundtimer.app-foundation-layout-release-46 C:\Users\bigfu\.gradle\caches\8.13\transforms\fc8656195c765a0c380dc7fca300cc9b\transformed\foundation-layout-release\res

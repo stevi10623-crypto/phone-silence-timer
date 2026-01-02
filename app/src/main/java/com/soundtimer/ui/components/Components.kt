@@ -19,6 +19,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.text.font.FontWeight
 import com.soundtimer.data.SoundCategory
 
 /**
@@ -225,26 +226,49 @@ fun NumberPicker(
  */
 @Composable
 fun CountdownDisplay(
-    remainingMillis: Long,
+    remainingTimeMillis: Long,
+    totalDurationMillis: Long,
     modifier: Modifier = Modifier
 ) {
-    val totalSeconds = remainingMillis / 1000
-    val hours = totalSeconds / 3600
-    val minutes = (totalSeconds % 3600) / 60
-    val seconds = totalSeconds % 60
+    val hours = (remainingTimeMillis / (1000 * 60 * 60))
+    val minutes = (remainingTimeMillis / (1000 * 60)) % 60
+    val seconds = (remainingTimeMillis / 1000) % 60
 
-    val timeText = if (hours > 0) {
-        String.format("%d:%02d:%02d", hours, minutes, seconds)
+    val progress = if (totalDurationMillis > 0) {
+        remainingTimeMillis.toFloat() / totalDurationMillis.toFloat()
     } else {
-        String.format("%02d:%02d", minutes, seconds)
+        0f
     }
 
-    Text(
-        text = timeText,
-        style = MaterialTheme.typography.displayLarge,
-        color = MaterialTheme.colorScheme.primary,
+    Box(
         modifier = modifier
-    )
+            .size(280.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        CircularProgressIndicator(
+            progress = progress,
+            modifier = Modifier.fillMaxSize(),
+            strokeWidth = 12.dp,
+            color = MaterialTheme.colorScheme.primary,
+            trackColor = MaterialTheme.colorScheme.surfaceVariant
+        )
+
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = String.format("%02d:%01d:%02d", hours, minutes, seconds),
+                style = MaterialTheme.typography.displayMedium,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+            Text(
+                text = "remaining",
+                style = MaterialTheme.typography.labelLarge,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        }
+    }
 }
 
 /**

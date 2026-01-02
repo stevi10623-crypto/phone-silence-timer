@@ -132,7 +132,10 @@ fun TimerScreen(
                                     color = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
                                 Spacer(modifier = Modifier.height(8.dp))
-                                CountdownDisplay(remainingMillis = remainingMillis)
+                                CountdownDisplay(
+                                    remainingTimeMillis = remainingMillis,
+                                    totalDurationMillis = timerState.durationMillis
+                                )
                             }
                         }
 
@@ -158,55 +161,32 @@ fun TimerScreen(
                         }
                     }
                 } else {
-                    // Time Picker
-                    Card(
+                    Row(
                         modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(24.dp),
-                        colors = CardDefaults.cardColors(
-                            containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
-                        )
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Column(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(24.dp),
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            Text(
-                                text = "Set Duration",
-                                style = MaterialTheme.typography.titleMedium,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
+                        NumberPicker(
+                            value = hours,
+                            onValueChange = { hours = it },
+                            label = "hrs",
+                            maxValue = 23,
+                            enabled = !isRunning
+                        )
 
-                            Spacer(modifier = Modifier.height(16.dp))
+                        Text(
+                            text = ":",
+                            style = MaterialTheme.typography.displaySmall,
+                            modifier = Modifier.padding(horizontal = 8.dp)
+                        )
 
-                            Row(
-                                horizontalArrangement = Arrangement.Center,
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                NumberPicker(
-                                    value = hours,
-                                    onValueChange = { hours = it },
-                                    label = "Hours",
-                                    maxValue = 23,
-                                    enabled = !isRunning
-                                )
-
-                                Text(
-                                    text = ":",
-                                    style = MaterialTheme.typography.displayMedium,
-                                    modifier = Modifier.padding(horizontal = 16.dp)
-                                )
-
-                                NumberPicker(
-                                    value = minutes,
-                                    onValueChange = { minutes = it },
-                                    label = "Minutes",
-                                    maxValue = 59,
-                                    enabled = !isRunning
-                                )
-                            }
-                        }
+                        NumberPicker(
+                            value = minutes,
+                            onValueChange = { minutes = it },
+                            label = "min",
+                            maxValue = 59,
+                            enabled = !isRunning
+                        )
                     }
                 }
             }
@@ -256,63 +236,59 @@ fun TimerScreen(
                 Spacer(modifier = Modifier.height(24.dp))
             }
 
-            // Sound Category Toggles
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    text = if (isRunning) "Muted Sounds" else "Sounds to Mute",
-                    style = MaterialTheme.typography.titleSmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
+            // Sound Category Section
+            Column(modifier = Modifier.fillMaxWidth()) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = if (isRunning) "Muted Sounds" else "Sounds to Mute",
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.primary
+                    )
 
-                if (!isRunning) {
-                    TextButton(
-                        onClick = {
-                            selectedCategories = if (selectedCategories.size == SoundCategory.values().size) {
-                                emptySet()
-                            } else {
-                                SoundCategory.values().toSet()
+                    if (!isRunning) {
+                        TextButton(
+                            onClick = {
+                                selectedCategories = if (selectedCategories.size == SoundCategory.entries.size) {
+                                    emptySet()
+                                } else {
+                                    SoundCategory.entries.toSet()
+                                }
+                                preferencesManager.saveSelectedCategories(selectedCategories)
                             }
-                            preferencesManager.saveSelectedCategories(selectedCategories)
+                        ) {
+                            Text(
+                                text = if (selectedCategories.size == SoundCategory.entries.size) "Deselect All" else "Select All",
+                                style = MaterialTheme.typography.labelLarge
+                            )
                         }
-                    ) {
-                        Text(
-                            text = if (selectedCategories.size == SoundCategory.values().size) "Deselect All" else "Select All",
-                            style = MaterialTheme.typography.labelLarge
-                        )
                     }
                 }
-            }
 
-            Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(8.dp))
 
-            Column(
-                verticalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                SoundCategory.values().forEach { category ->
-                    val isEnabled = if (isRunning) {
-                        timerState.mutedCategories.contains(category)
-                    } else {
-                        selectedCategories.contains(category)
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    SoundCategory.entries.forEach { category ->
+                        val isSelected = selectedCategories.contains(category)
+                        SoundToggle(
+                            category = category,
+                            enabled = isSelected,
+                            onToggle = {
+                                selectedCategories = if (isSelected) {
+                                    selectedCategories - category
+                                } else {
+                                    selectedCategories + category
+                                }
+                                preferencesManager.saveSelectedCategories(selectedCategories)
+                            },
+                            isTimerRunning = isRunning
+                        )
                     }
-
-                    SoundToggle(
-                        category = category,
-                        enabled = isEnabled,
-                        onToggle = { enabled ->
-                            selectedCategories = if (enabled) {
-                                selectedCategories + category
-                            } else {
-                                selectedCategories - category
-                            }
-                            preferencesManager.saveSelectedCategories(selectedCategories)
-                        },
-                        isTimerRunning = isRunning,
-                        modifier = Modifier.fillMaxWidth()
-                    )
                 }
             }
 
