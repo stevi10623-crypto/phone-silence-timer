@@ -32,15 +32,9 @@ data class TimerState(
     val endTimeMillis: Long = 0L,
     val startTimeMillis: Long = 0L,
     val durationMillis: Long = 0L,
+    val remainingTimeMillis: Long = 0L,
     val mutedCategories: Set<SoundCategory> = emptySet()
 ) {
-    val remainingTimeMillis: Long
-        get() = if (isRunning) {
-            maxOf(0L, endTimeMillis - System.currentTimeMillis())
-        } else {
-            0L
-        }
-
     val isExpired: Boolean
         get() = isRunning && System.currentTimeMillis() >= endTimeMillis
 

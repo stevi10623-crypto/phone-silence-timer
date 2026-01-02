@@ -84,6 +84,7 @@ class TimerService : Service() {
             endTimeMillis = endTime,
             startTimeMillis = now,
             durationMillis = durationMillis,
+            remainingTimeMillis = durationMillis,
             mutedCategories = categories
         )
         preferencesManager.saveTimerState(timerState)
@@ -122,7 +123,14 @@ class TimerService : Service() {
     private fun startCountdown(endTime: Long) {
         countdownJob = serviceScope.launch {
             while (isActive) {
-                val remaining = endTime - System.currentTimeMillis()
+                val now = System.currentTimeMillis()
+                val remaining = maxOf(0L, endTime - now)
+                
+                // Update shared state first so UI reacts
+                val currentState = preferencesManager.getTimerState()
+                val tickingState = currentState.copy(remainingTimeMillis = remaining)
+                _timerStateFlow.value = tickingState
+
                 if (remaining <= 0) {
                     // Timer completed
                     withContext(Dispatchers.Main) {
@@ -134,10 +142,6 @@ class TimerService : Service() {
                 // Update notification
                 val formatted = notificationHelper.formatTime(remaining)
                 notificationHelper.updateTimerNotification(formatted)
-
-                // Update shared state
-                val currentState = preferencesManager.getTimerState()
-                _timerStateFlow.value = currentState
 
                 // Wait before next update
                 delay(1000)

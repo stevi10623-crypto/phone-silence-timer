@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="background">#FFFBFE</color>
+    <color name="background_dark">#1C1B1F</color>
+    <color name="error">#B3261E</color>
+    <color name="on_background">#1C1B1F</color>
+    <color name="on_background_dark">#E6E1E5</color>
+    <color name="on_error">#FFFFFF</color>
+    <color name="on_primary">#FFFFFF</color>
+    <color name="on_primary_container">#21005D</color>
+    <color name="on_primary_container_dark">#EADDFF</color>
+    <color name="on_primary_dark">#381E72</color>
+    <color name="on_secondary">#FFFFFF</color>
+    <color name="on_secondary_container">#1D192B</color>
+    <color name="on_surface">#1C1B1F</color>
+    <color name="on_surface_dark">#E6E1E5</color>
+    <color name="on_tertiary">#FFFFFF</color>
+    <color name="on_tertiary_container">#31111D</color>
+    <color name="primary">#6750A4</color>
+    <color name="primary_container">#EADDFF</color>
+    <color name="primary_container_dark">#4F378B</color>
+    <color name="primary_dark">#D0BCFF</color>
+    <color name="secondary">#625B71</color>
+    <color name="secondary_container">#E8DEF8</color>
+    <color name="status_normal">#4CAF50</color>
+    <color name="status_silenced">#FF9800</color>
+    <color name="surface">#FFFBFE</color>
+    <color name="surface_dark">#1C1B1F</color>
+    <color name="tertiary">#7D5260</color>
+    <color name="tertiary_container">#FFD8E4</color>
+    <string name="app_name">Sound Timer</string>
+    <string name="error_no_duration">Please set a duration</string>
+    <string name="error_no_sounds_selected">Please select at least one sound category</string>
+    <string name="extend_timer">Extend</string>
+    <string name="hours">Hours</string>
+    <string name="minutes">Minutes</string>
+    <string name="notification_action_extend">+15 min</string>
+    <string name="notification_action_stop">Stop</string>
+    <string name="notification_channel_description">Shows the current timer countdown</string>
+    <string name="notification_channel_name">Timer Status</string>
+    <string name="notification_timer_complete_text">Your timer has ended and all sounds have been restored.</string>
+    <string name="notification_timer_complete_title">Sounds Restored</string>
+    <string name="notification_timer_running">Sound Timer Active</string>
+    <string name="onboarding_continue">Continue</string>
+    <string name="onboarding_description">This app needs Do Not Disturb access to control your phone\'s sounds. This allows the app to mute and restore your ringer, notifications, and media volume.</string>
+    <string name="onboarding_grant_permission">Grant Permission</string>
+    <string name="onboarding_permission_granted">Permission Granted!</string>
+    <string name="onboarding_title">Welcome to Sound Timer</string>
+    <string name="preset_15min">15 min</string>
+    <string name="preset_1hour">1 hour</string>
+    <string name="preset_2hours">2 hours</string>
+    <string name="preset_30min">30 min</string>
+    <string name="sound_alarm">Alarm</string>
+    <string name="sound_media">Media</string>
+    <string name="sound_notifications">Notifications</string>
+    <string name="sound_ringer">Ringer (Calls)</string>
+    <string name="start_timer">Start Timer</string>
+    <string name="status_normal">NORMAL</string>
+    <string name="status_silenced">SILENCED</string>
+    <string name="stop_timer">Stop Timer</string>
+    <string name="timer_title">Sound Timer</string>
+    <style name="Theme.SoundTimer" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">#6750A4</item>
+        <item name="android:navigationBarColor">#FFFBFE</item>
+    </style>
+</resources>

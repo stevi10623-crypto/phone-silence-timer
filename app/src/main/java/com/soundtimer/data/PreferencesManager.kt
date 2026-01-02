@@ -34,11 +34,14 @@ class PreferencesManager(context: Context) {
             ?.mapNotNull { runCatching { SoundCategory.valueOf(it) }.getOrNull() }
             ?.toSet() ?: emptySet()
 
+        val remaining = if (isRunning) maxOf(0L, endTime - System.currentTimeMillis()) else 0L
+
         return TimerState(
             isRunning = isRunning,
             endTimeMillis = endTime,
             startTimeMillis = startTime,
             durationMillis = duration,
+            remainingTimeMillis = remaining,
             mutedCategories = categories
         )
     }
