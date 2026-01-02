@@ -1,0 +1,372 @@
+package com.soundtimer.ui.screens
+
+import android.content.Context
+import android.content.Intent
+import android.os.Build
+import androidx.compose.animation.*
+import androidx.compose.animation.core.*
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.PlayArrow
+import androidx.compose.material.icons.rounded.Stop
+import androidx.compose.material.icons.rounded.Add
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import com.soundtimer.data.PreferencesManager
+import com.soundtimer.data.SoundCategory
+import com.soundtimer.data.TimerState
+import com.soundtimer.service.TimerService
+import com.soundtimer.ui.components.*
+import com.soundtimer.ui.theme.GradientEnd
+import com.soundtimer.ui.theme.GradientStart
+
+/**
+ * Main timer screen with time picker, sound toggles, and countdown display.
+ */
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TimerScreen(
+    timerState: TimerState,
+    modifier: Modifier = Modifier
+) {
+    val context = LocalContext.current
+    val preferencesManager = remember { PreferencesManager(context) }
+
+    var hours by remember { mutableIntStateOf(0) }
+    var minutes by remember { mutableIntStateOf(30) }
+
+    var selectedCategories by remember {
+        mutableStateOf(preferencesManager.getSelectedCategories())
+    }
+
+    val isRunning = timerState.isRunning
+    val remainingMillis = timerState.remainingTimeMillis
+
+    // Pulsing animation for the start button
+    val infiniteTransition = rememberInfiniteTransition(label = "buttonPulse")
+    val buttonScale by infiniteTransition.animateFloat(
+        initialValue = 1f,
+        targetValue = if (!isRunning) 1.05f else 1f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(1500, easing = EaseInOutCubic),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "buttonScale"
+    )
+
+    val scrollState = rememberScrollState()
+
+    Scaffold(
+        topBar = {
+            CenterAlignedTopAppBar(
+                title = {
+                    Text(
+                        text = "Sound Timer",
+                        style = MaterialTheme.typography.headlineMedium
+                    )
+                },
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.surface
+                )
+            )
+        }
+    ) { paddingValues ->
+        Column(
+            modifier = modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+                .verticalScroll(scrollState)
+                .padding(horizontal = 24.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Status Indicator
+            StatusIndicator(isSilenced = isRunning)
+
+            Spacer(modifier = Modifier.height(32.dp))
+
+            // Timer Display Area
+            AnimatedContent(
+                targetState = isRunning,
+                transitionSpec = {
+                    fadeIn(animationSpec = tween(300)) togetherWith
+                            fadeOut(animationSpec = tween(300))
+                },
+                label = "timerContent"
+            ) { running ->
+                if (running) {
+                    // Countdown Display
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Card(
+                            modifier = Modifier.fillMaxWidth(),
+                            shape = RoundedCornerShape(24.dp),
+                            colors = CardDefaults.cardColors(
+                                containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f)
+                            )
+                        ) {
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(32.dp),
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                Text(
+                                    text = "Time Remaining",
+                                    style = MaterialTheme.typography.labelLarge,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                                Spacer(modifier = Modifier.height(8.dp))
+                                CountdownDisplay(remainingMillis = remainingMillis)
+                            }
+                        }
+
+                        Spacer(modifier = Modifier.height(16.dp))
+
+                        // Extend Button
+                        OutlinedButton(
+                            onClick = {
+                                val intent = Intent(context, TimerService::class.java).apply {
+                                    action = TimerService.ACTION_EXTEND
+                                }
+                                context.startService(intent)
+                            },
+                            shape = RoundedCornerShape(24.dp)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Rounded.Add,
+                                contentDescription = "Extend",
+                                modifier = Modifier.size(20.dp)
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text("Add 15 minutes")
+                        }
+                    }
+                } else {
+                    // Time Picker
+                    Card(
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(24.dp),
+                        colors = CardDefaults.cardColors(
+                            containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
+                        )
+                    ) {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(24.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Text(
+                                text = "Set Duration",
+                                style = MaterialTheme.typography.titleMedium,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+
+                            Spacer(modifier = Modifier.height(16.dp))
+
+                            Row(
+                                horizontalArrangement = Arrangement.Center,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                NumberPicker(
+                                    value = hours,
+                                    onValueChange = { hours = it },
+                                    label = "Hours",
+                                    maxValue = 23,
+                                    enabled = !isRunning
+                                )
+
+                                Text(
+                                    text = ":",
+                                    style = MaterialTheme.typography.displayMedium,
+                                    modifier = Modifier.padding(horizontal = 16.dp)
+                                )
+
+                                NumberPicker(
+                                    value = minutes,
+                                    onValueChange = { minutes = it },
+                                    label = "Minutes",
+                                    maxValue = 59,
+                                    enabled = !isRunning
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+
+            Spacer(modifier = Modifier.height(24.dp))
+
+            // Quick Presets
+            if (!isRunning) {
+                Text(
+                    text = "Quick Presets",
+                    style = MaterialTheme.typography.titleSmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+
+                Spacer(modifier = Modifier.height(12.dp))
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    PresetButton(
+                        label = "15m",
+                        onClick = { hours = 0; minutes = 15 },
+                        modifier = Modifier.weight(1f),
+                        enabled = !isRunning
+                    )
+                    PresetButton(
+                        label = "30m",
+                        onClick = { hours = 0; minutes = 30 },
+                        modifier = Modifier.weight(1f),
+                        enabled = !isRunning
+                    )
+                    PresetButton(
+                        label = "1h",
+                        onClick = { hours = 1; minutes = 0 },
+                        modifier = Modifier.weight(1f),
+                        enabled = !isRunning
+                    )
+                    PresetButton(
+                        label = "2h",
+                        onClick = { hours = 2; minutes = 0 },
+                        modifier = Modifier.weight(1f),
+                        enabled = !isRunning
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(24.dp))
+            }
+
+            // Sound Category Toggles
+            Text(
+                text = if (isRunning) "Muted Sounds" else "Sounds to Mute",
+                style = MaterialTheme.typography.titleSmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            Column(
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                SoundCategory.values().forEach { category ->
+                    val isEnabled = if (isRunning) {
+                        timerState.mutedCategories.contains(category)
+                    } else {
+                        selectedCategories.contains(category)
+                    }
+
+                    SoundToggle(
+                        category = category,
+                        enabled = isEnabled,
+                        onToggle = { enabled ->
+                            selectedCategories = if (enabled) {
+                                selectedCategories + category
+                            } else {
+                                selectedCategories - category
+                            }
+                            preferencesManager.saveSelectedCategories(selectedCategories)
+                        },
+                        isTimerRunning = isRunning,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(32.dp))
+
+            // Start/Stop Button
+            Box(
+                modifier = Modifier
+                    .size(100.dp)
+                    .scale(buttonScale)
+                    .clip(CircleShape)
+                    .background(
+                        brush = if (isRunning) {
+                            Brush.radialGradient(
+                                colors = listOf(
+                                    MaterialTheme.colorScheme.error,
+                                    MaterialTheme.colorScheme.error.copy(alpha = 0.8f)
+                                )
+                            )
+                        } else {
+                            Brush.radialGradient(
+                                colors = listOf(GradientStart, GradientEnd)
+                            )
+                        }
+                    ),
+                contentAlignment = Alignment.Center
+            ) {
+                IconButton(
+                    onClick = {
+                        if (isRunning) {
+                            stopTimer(context)
+                        } else {
+                            val durationMillis = (hours * 60L + minutes) * 60L * 1000L
+                            if (durationMillis > 0 && selectedCategories.isNotEmpty()) {
+                                startTimer(context, durationMillis, selectedCategories)
+                            }
+                        }
+                    },
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    Icon(
+                        imageVector = if (isRunning) Icons.Rounded.Stop else Icons.Rounded.PlayArrow,
+                        contentDescription = if (isRunning) "Stop Timer" else "Start Timer",
+                        tint = MaterialTheme.colorScheme.surface,
+                        modifier = Modifier.size(48.dp)
+                    )
+                }
+            }
+
+            Text(
+                text = if (isRunning) "Tap to Stop" else "Tap to Start",
+                style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.padding(top = 8.dp)
+            )
+
+            Spacer(modifier = Modifier.height(32.dp))
+        }
+    }
+}
+
+private fun startTimer(context: Context, durationMillis: Long, categories: Set<SoundCategory>) {
+    val intent = Intent(context, TimerService::class.java).apply {
+        action = TimerService.ACTION_START
+        putExtra(TimerService.EXTRA_DURATION, durationMillis)
+        putExtra(TimerService.EXTRA_CATEGORIES, categories.map { it.name }.toTypedArray())
+    }
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        context.startForegroundService(intent)
+    } else {
+        context.startService(intent)
+    }
+}
+
+private fun stopTimer(context: Context) {
+    val intent = Intent(context, TimerService::class.java).apply {
+        action = TimerService.ACTION_STOP
+    }
+    context.startService(intent)
+}

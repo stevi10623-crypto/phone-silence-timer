@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Sound Timer</string>
+
+    <!-- Onboarding Screen -->
+    <string name="onboarding_title">Welcome to Sound Timer</string>
+    <string name="onboarding_description">This app needs Do Not Disturb access to control your phone\'s sounds. This allows the app to mute and restore your ringer, notifications, and media volume.</string>
+    <string name="onboarding_permission_granted">Permission Granted!</string>
+    <string name="onboarding_grant_permission">Grant Permission</string>
+    <string name="onboarding_continue">Continue</string>
+
+    <!-- Timer Screen -->
+    <string name="timer_title">Sound Timer</string>
+    <string name="status_normal">NORMAL</string>
+    <string name="status_silenced">SILENCED</string>
+    <string name="start_timer">Start Timer</string>
+    <string name="stop_timer">Stop Timer</string>
+    <string name="extend_timer">Extend</string>
+
+    <!-- Sound Categories -->
+    <string name="sound_ringer">Ringer (Calls)</string>
+    <string name="sound_notifications">Notifications</string>
+    <string name="sound_media">Media</string>
+    <string name="sound_alarm">Alarm</string>
+
+    <!-- Presets -->
+    <string name="preset_15min">15 min</string>
+    <string name="preset_30min">30 min</string>
+    <string name="preset_1hour">1 hour</string>
+    <string name="preset_2hours">2 hours</string>
+
+    <!-- Time Picker -->
+    <string name="hours">Hours</string>
+    <string name="minutes">Minutes</string>
+
+    <!-- Notifications -->
+    <string name="notification_channel_name">Timer Status</string>
+    <string name="notification_channel_description">Shows the current timer countdown</string>
+    <string name="notification_timer_running">Sound Timer Active</string>
+    <string name="notification_timer_complete_title">Sounds Restored</string>
+    <string name="notification_timer_complete_text">Your timer has ended and all sounds have been restored.</string>
+    <string name="notification_action_stop">Stop</string>
+    <string name="notification_action_extend">+15 min</string>
+
+    <!-- Errors -->
+    <string name="error_no_duration">Please set a duration</string>
+    <string name="error_no_sounds_selected">Please select at least one sound category</string>
+</resources>
