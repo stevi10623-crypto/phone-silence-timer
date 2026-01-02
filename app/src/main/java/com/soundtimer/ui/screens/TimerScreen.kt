@@ -257,13 +257,37 @@ fun TimerScreen(
             }
 
             // Sound Category Toggles
-            Text(
-                text = if (isRunning) "Muted Sounds" else "Sounds to Mute",
-                style = MaterialTheme.typography.titleSmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = if (isRunning) "Muted Sounds" else "Sounds to Mute",
+                    style = MaterialTheme.typography.titleSmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
 
-            Spacer(modifier = Modifier.height(12.dp))
+                if (!isRunning) {
+                    TextButton(
+                        onClick = {
+                            selectedCategories = if (selectedCategories.size == SoundCategory.values().size) {
+                                emptySet()
+                            } else {
+                                SoundCategory.values().toSet()
+                            }
+                            preferencesManager.saveSelectedCategories(selectedCategories)
+                        }
+                    ) {
+                        Text(
+                            text = if (selectedCategories.size == SoundCategory.values().size) "Deselect All" else "Select All",
+                            style = MaterialTheme.typography.labelLarge
+                        )
+                    }
+                }
+            }
+
+            Spacer(modifier = Modifier.height(8.dp))
 
             Column(
                 verticalArrangement = Arrangement.spacedBy(8.dp)

@@ -122,13 +122,19 @@ class TimerService : Service() {
 
     private fun startCountdown(endTime: Long) {
         countdownJob = serviceScope.launch {
+            // Get the base state once
+            val baseState = preferencesManager.getTimerState()
+            
             while (isActive) {
                 val now = System.currentTimeMillis()
                 val remaining = maxOf(0L, endTime - now)
                 
-                // Update shared state first so UI reacts
-                val currentState = preferencesManager.getTimerState()
-                val tickingState = currentState.copy(remainingTimeMillis = remaining)
+                // Update shared state with explicit remaining time
+                val tickingState = baseState.copy(
+                    isRunning = true,
+                    endTimeMillis = endTime,
+                    remainingTimeMillis = remaining
+                )
                 _timerStateFlow.value = tickingState
 
                 if (remaining <= 0) {
