@@ -1,6 +1,6 @@
-/build
-/.gradle
-/.idea
+build/
+.gradle/
+.idea/
 *.iml
 local.properties
 .DS_Store
@@ -8,3 +8,5 @@ local.properties
 .externalNativeBuild
 .cxx
 *.jks
+*.log
+build_output.txt
