@@ -155,7 +155,7 @@ if $cygwin ; then
     if echo "$i" | grep -E "$OURCYGPATTERN" >/dev/null ; then
         JAVACMD=`cygpath --path --windows "$i"`
     fi
-    BA some _SAVE="$APP_BASE_NAME"
+    BASENAME_SAVE="$APP_BASE_NAME"
     APP_BASE_NAME=`cygpath --path --windows "$APP_BASE_NAME"`
 fi
 
