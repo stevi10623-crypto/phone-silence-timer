@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Sound Timer</string>
+    <string name="app_name">Phone Silence Timer</string>
 
     <!-- Onboarding Screen -->
-    <string name="onboarding_title">Welcome to Sound Timer</string>
+    <string name="onboarding_title">Welcome to Phone Silence Timer</string>
     <string name="onboarding_description">This app needs Do Not Disturb access to control your phone\'s sounds. This allows the app to mute and restore your ringer, notifications, and media volume.</string>
     <string name="onboarding_permission_granted">Permission Granted!</string>
     <string name="onboarding_grant_permission">Grant Permission</string>
     <string name="onboarding_continue">Continue</string>
 
     <!-- Timer Screen -->
-    <string name="timer_title">Sound Timer</string>
+    <string name="timer_title">Phone Silence Timer</string>
     <string name="status_normal">NORMAL</string>
     <string name="status_silenced">SILENCED</string>
     <string name="start_timer">Start Timer</string>
@@ -36,7 +36,7 @@
     <!-- Notifications -->
     <string name="notification_channel_name">Timer Status</string>
     <string name="notification_channel_description">Shows the current timer countdown</string>
-    <string name="notification_timer_running">Sound Timer Active</string>
+    <string name="notification_timer_running">Phone Silence Timer Active</string>
     <string name="notification_timer_complete_title">Sounds Restored</string>
     <string name="notification_timer_complete_text">Your timer has ended and all sounds have been restored.</string>
     <string name="notification_action_stop">Stop</string>

@@ -4,11 +4,12 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import com.soundtimer.data.AndroidPreferencesManager
 import com.soundtimer.data.PreferencesManager
 import com.soundtimer.data.TimerState
 import com.soundtimer.util.AlarmHelper
 import com.soundtimer.util.NotificationHelper
-import com.soundtimer.util.VolumeManager
+import com.soundtimer.util.AndroidVolumeController
 
 /**
  * Broadcast receiver that handles the timer completion alarm.
@@ -18,15 +19,15 @@ class AlarmReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
         if (intent.action == AlarmHelper.ACTION_TIMER_END) {
-            val preferencesManager = PreferencesManager(context)
+            val preferencesManager = AndroidPreferencesManager(context)
             val timerState = preferencesManager.getTimerState()
 
             if (timerState.isRunning) {
                 // Restore volumes
                 val volumeState = preferencesManager.getVolumeState()
                 if (volumeState != null) {
-                    val volumeManager = VolumeManager(context)
-                    volumeManager.restoreVolumes(volumeState, timerState.mutedCategories)
+                    val volumeController = AndroidVolumeController(context)
+                    volumeController.restoreVolumes(volumeState, timerState.mutedCategories)
                 }
 
                 // Show completion notification

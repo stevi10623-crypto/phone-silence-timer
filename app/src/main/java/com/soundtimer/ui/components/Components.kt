@@ -38,13 +38,15 @@ fun SoundToggle(
         SoundCategory.NOTIFICATION -> Icons.Rounded.Notifications
         SoundCategory.MEDIA -> Icons.Rounded.MusicNote
         SoundCategory.ALARM -> Icons.Rounded.Alarm
+        SoundCategory.SYSTEM -> Icons.Rounded.Smartphone // Using Smartphone icon for System
     }
 
     val label = when (category) {
-        SoundCategory.RINGER -> "Ringer"
-        SoundCategory.NOTIFICATION -> "Notifications"
+        SoundCategory.RINGER -> "Calls"
+        SoundCategory.NOTIFICATION -> "Notifs"
         SoundCategory.MEDIA -> "Media"
         SoundCategory.ALARM -> "Alarm"
+        SoundCategory.SYSTEM -> "System"
     }
 
     val backgroundColor by animateColorAsState(
@@ -193,7 +195,7 @@ fun NumberPicker(
         }
 
         Text(
-            text = String.format("%02d", value),
+            text = value.toString().padStart(2, '0'),
             style = MaterialTheme.typography.displayMedium,
             color = if (enabled) {
                 MaterialTheme.colorScheme.onSurface
@@ -230,9 +232,10 @@ fun CountdownDisplay(
     totalDurationMillis: Long,
     modifier: Modifier = Modifier
 ) {
-    val hours = (remainingTimeMillis / (1000 * 60 * 60))
-    val minutes = (remainingTimeMillis / (1000 * 60)) % 60
-    val seconds = (remainingTimeMillis / 1000) % 60
+    val totalSeconds = remainingTimeMillis / 1000
+    val hours = totalSeconds / 3600
+    val minutes = (totalSeconds % 3600) / 60
+    val seconds = totalSeconds % 60
 
     val progress = if (totalDurationMillis > 0) {
         remainingTimeMillis.toFloat() / totalDurationMillis.toFloat()
@@ -257,7 +260,7 @@ fun CountdownDisplay(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = String.format("%02d:%01d:%02d", hours, minutes, seconds),
+                text = "${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(1, '0')}:${seconds.toString().padStart(2, '0')}",
                 style = MaterialTheme.typography.displayMedium,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.onSurface

@@ -102,6 +102,7 @@ class NotificationHelper(private val context: Context) {
     /**
      * Shows the timer completion notification.
      */
+    @android.annotation.SuppressLint("MissingPermission")
     fun showCompletionNotification() {
         if (!hasNotificationPermission()) {
             return
@@ -131,6 +132,7 @@ class NotificationHelper(private val context: Context) {
     /**
      * Updates the timer notification with new remaining time.
      */
+    @android.annotation.SuppressLint("MissingPermission")
     fun updateTimerNotification(remainingTimeFormatted: String) {
         if (!hasNotificationPermission()) {
             return
@@ -170,9 +172,9 @@ class NotificationHelper(private val context: Context) {
         val seconds = totalSeconds % 60
 
         return if (hours > 0) {
-            String.format("%d:%02d:%02d", hours, minutes, seconds)
+            String.format(java.util.Locale.getDefault(), "%d:%02d:%02d", hours, minutes, seconds)
         } else {
-            String.format("%02d:%02d", minutes, seconds)
+            String.format(java.util.Locale.getDefault(), "%02d:%02d", minutes, seconds)
         }
     }
 

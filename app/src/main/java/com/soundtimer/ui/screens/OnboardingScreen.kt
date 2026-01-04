@@ -1,7 +1,5 @@
 package com.soundtimer.ui.screens
 
-import android.content.Intent
-import android.provider.Settings
 import androidx.compose.animation.*
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
@@ -18,22 +16,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.soundtimer.ui.theme.GradientEnd
 import com.soundtimer.ui.theme.GradientStart
 
 /**
- * Onboarding screen that guides the user through granting Do Not Disturb access.
+ * Onboarding screen that guides the user through set up.
  */
 @Composable
 fun OnboardingScreen(
     isPermissionGranted: Boolean,
-    onContinue: () -> Unit
+    onContinue: () -> Unit,
+    onGrantPermission: () -> Unit
 ) {
-    val context = LocalContext.current
-
     // Animation for the icon
     val infiniteTransition = rememberInfiniteTransition(label = "pulse")
     val scale by infiniteTransition.animateFloat(
@@ -104,7 +100,7 @@ fun OnboardingScreen(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                        text = "This app needs Do Not Disturb access to control your phone's sounds.",
+                        text = "This app needs permission to control your phone's sounds effectively.",
                         style = MaterialTheme.typography.bodyLarge,
                         color = MaterialTheme.colorScheme.onSurface,
                         textAlign = TextAlign.Center
@@ -113,7 +109,7 @@ fun OnboardingScreen(
                     Spacer(modifier = Modifier.height(16.dp))
 
                     Text(
-                        text = "This permission allows the app to mute and restore your ringer, notifications, and media volume.",
+                        text = "This allows the app to mute and restore your ringer, notifications, and media volume automatically.",
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         textAlign = TextAlign.Center
@@ -157,7 +153,7 @@ fun OnboardingScreen(
                             }
                         } else {
                             Text(
-                                text = "Tap the button below to open settings",
+                                text = "Granting access allows the timer to work properly.",
                                 style = MaterialTheme.typography.bodyMedium,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                                 textAlign = TextAlign.Center
@@ -197,10 +193,7 @@ fun OnboardingScreen(
                     }
                 } else {
                     Button(
-                        onClick = {
-                            val intent = Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
-                            context.startActivity(intent)
-                        },
+                        onClick = onGrantPermission,
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(56.dp),
@@ -216,17 +209,6 @@ fun OnboardingScreen(
                         )
                     }
                 }
-            }
-
-            if (!isPermissionGranted) {
-                Spacer(modifier = Modifier.height(16.dp))
-
-                Text(
-                    text = "Find \"Sound Timer\" in the list and toggle it ON",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.surface.copy(alpha = 0.7f),
-                    textAlign = TextAlign.Center
-                )
             }
         }
     }

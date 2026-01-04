@@ -1,5 +1,7 @@
 package com.soundtimer.data
 
+import kotlinx.datetime.Clock
+
 /**
  * Enum representing the different sound categories that can be muted.
  */
@@ -7,7 +9,8 @@ enum class SoundCategory {
     RINGER,        // Phone calls
     NOTIFICATION,  // Notification sounds
     MEDIA,         // Music, videos, games
-    ALARM          // Alarm sounds (optional, usually left on)
+    ALARM,         // Alarm sounds (optional, usually left on)
+    SYSTEM         // System sounds (charging, touch, etc.)
 }
 
 /**
@@ -17,7 +20,8 @@ data class VolumeState(
     val ringerVolume: Int = 0,
     val notificationVolume: Int = 0,
     val mediaVolume: Int = 0,
-    val alarmVolume: Int = 0
+    val alarmVolume: Int = 0,
+    val systemVolume: Int = 0
 ) {
     companion object {
         val EMPTY = VolumeState()
@@ -36,7 +40,7 @@ data class TimerState(
     val mutedCategories: Set<SoundCategory> = emptySet()
 ) {
     val isExpired: Boolean
-        get() = isRunning && System.currentTimeMillis() >= endTimeMillis
+        get() = isRunning && Clock.System.now().toEpochMilliseconds() >= endTimeMillis
 
     companion object {
         val IDLE = TimerState()

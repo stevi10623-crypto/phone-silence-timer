@@ -4,3 +4,4 @@
 
 # Keep data classes for JSON serialization
 -keepclassmembers class com.soundtimer.data.** { *; }
+-dontwarn kotlinx.serialization.**

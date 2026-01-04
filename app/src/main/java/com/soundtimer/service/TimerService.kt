@@ -5,12 +5,14 @@ import android.content.Intent
 import android.content.pm.ServiceInfo
 import android.os.Build
 import android.os.IBinder
+import com.soundtimer.data.AndroidPreferencesManager
 import com.soundtimer.data.PreferencesManager
 import com.soundtimer.data.SoundCategory
 import com.soundtimer.data.TimerState
 import com.soundtimer.util.AlarmHelper
 import com.soundtimer.util.NotificationHelper
-import com.soundtimer.util.VolumeManager
+import com.soundtimer.util.VolumeController
+import com.soundtimer.util.AndroidVolumeController
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -23,7 +25,7 @@ import kotlinx.coroutines.flow.asStateFlow
 class TimerService : Service() {
 
     private lateinit var preferencesManager: PreferencesManager
-    private lateinit var volumeManager: VolumeManager
+    private lateinit var volumeController: VolumeController
     private lateinit var alarmHelper: AlarmHelper
     private lateinit var notificationHelper: NotificationHelper
 
@@ -32,14 +34,20 @@ class TimerService : Service() {
 
     override fun onCreate() {
         super.onCreate()
-        preferencesManager = PreferencesManager(this)
-        volumeManager = VolumeManager(this)
+        preferencesManager = AndroidPreferencesManager(this)
+        volumeController = AndroidVolumeController(this)
         alarmHelper = AlarmHelper(this)
         notificationHelper = NotificationHelper(this)
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        when (intent?.action) {
+        if (intent == null) {
+            // Service restarted by system (START_STICKY)
+            restoreFromBoot()
+            return START_STICKY
+        }
+
+        when (intent.action) {
             ACTION_START -> {
                 val durationMillis = intent.getLongExtra(EXTRA_DURATION, 0L)
                 val categories = intent.getStringArrayExtra(EXTRA_CATEGORIES)
@@ -68,11 +76,11 @@ class TimerService : Service() {
         countdownJob?.cancel()
 
         // Save current volumes before muting
-        val currentVolumes = volumeManager.captureCurrentVolumes()
+        val currentVolumes = volumeController.captureCurrentVolumes()
         preferencesManager.saveVolumeState(currentVolumes)
 
         // Mute selected categories
-        volumeManager.muteCategories(categories)
+        volumeController.muteCategories(categories)
 
         // Calculate end time
         val now = System.currentTimeMillis()
@@ -203,7 +211,7 @@ class TimerService : Service() {
             val volumeState = preferencesManager.getVolumeState()
             val timerState = preferencesManager.getTimerState()
             if (volumeState != null) {
-                volumeManager.restoreVolumes(volumeState, timerState.mutedCategories)
+                volumeController.restoreVolumes(volumeState, timerState.mutedCategories)
             }
         }
 
@@ -221,7 +229,7 @@ class TimerService : Service() {
         val volumeState = preferencesManager.getVolumeState()
         val timerState = preferencesManager.getTimerState()
         if (volumeState != null) {
-            volumeManager.restoreVolumes(volumeState, timerState.mutedCategories)
+            volumeController.restoreVolumes(volumeState, timerState.mutedCategories)
         }
 
         // Show completion notification

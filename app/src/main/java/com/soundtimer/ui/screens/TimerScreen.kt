@@ -1,8 +1,5 @@
 package com.soundtimer.ui.screens
 
-import android.content.Context
-import android.content.Intent
-import android.os.Build
 import androidx.compose.animation.*
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
@@ -22,13 +19,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.soundtimer.data.PreferencesManager
 import com.soundtimer.data.SoundCategory
 import com.soundtimer.data.TimerState
-import com.soundtimer.service.TimerService
+import com.soundtimer.ui.TimerActionHandler
 import com.soundtimer.ui.components.*
 import com.soundtimer.ui.theme.GradientEnd
 import com.soundtimer.ui.theme.GradientStart
@@ -40,11 +36,10 @@ import com.soundtimer.ui.theme.GradientStart
 @Composable
 fun TimerScreen(
     timerState: TimerState,
+    preferencesManager: PreferencesManager,
+    actionHandler: TimerActionHandler,
     modifier: Modifier = Modifier
 ) {
-    val context = LocalContext.current
-    val preferencesManager = remember { PreferencesManager(context) }
-
     var hours by remember { mutableIntStateOf(0) }
     var minutes by remember { mutableIntStateOf(30) }
 
@@ -74,7 +69,7 @@ fun TimerScreen(
             CenterAlignedTopAppBar(
                 title = {
                     Text(
-                        text = "Sound Timer",
+                        text = "Phone Silence Timer",
                         style = MaterialTheme.typography.headlineMedium
                     )
                 },
@@ -144,10 +139,7 @@ fun TimerScreen(
                         // Extend Button
                         OutlinedButton(
                             onClick = {
-                                val intent = Intent(context, TimerService::class.java).apply {
-                                    action = TimerService.ACTION_EXTEND
-                                }
-                                context.startService(intent)
+                                actionHandler.extendTimer(15 * 60 * 1000L) // 15 mins
                             },
                             shape = RoundedCornerShape(24.dp)
                         ) {
@@ -250,18 +242,19 @@ fun TimerScreen(
                     )
 
                     if (!isRunning) {
+                        val allCategories = SoundCategory.entries.toSet()
                         TextButton(
                             onClick = {
-                                selectedCategories = if (selectedCategories.size == SoundCategory.entries.size) {
+                                selectedCategories = if (selectedCategories.size == allCategories.size) {
                                     emptySet()
                                 } else {
-                                    SoundCategory.entries.toSet()
+                                    allCategories
                                 }
                                 preferencesManager.saveSelectedCategories(selectedCategories)
                             }
                         ) {
                             Text(
-                                text = if (selectedCategories.size == SoundCategory.entries.size) "Deselect All" else "Select All",
+                                text = if (selectedCategories.size == allCategories.size) "Deselect All" else "Select All",
                                 style = MaterialTheme.typography.labelLarge
                             )
                         }
@@ -319,11 +312,11 @@ fun TimerScreen(
                 IconButton(
                     onClick = {
                         if (isRunning) {
-                            stopTimer(context)
+                            actionHandler.stopTimer()
                         } else {
                             val durationMillis = (hours * 60L + minutes) * 60L * 1000L
                             if (durationMillis > 0 && selectedCategories.isNotEmpty()) {
-                                startTimer(context, durationMillis, selectedCategories)
+                                actionHandler.startTimer(durationMillis, selectedCategories)
                             }
                         }
                     },
@@ -348,25 +341,4 @@ fun TimerScreen(
             Spacer(modifier = Modifier.height(32.dp))
         }
     }
-}
-
-private fun startTimer(context: Context, durationMillis: Long, categories: Set<SoundCategory>) {
-    val intent = Intent(context, TimerService::class.java).apply {
-        action = TimerService.ACTION_START
-        putExtra(TimerService.EXTRA_DURATION, durationMillis)
-        putExtra(TimerService.EXTRA_CATEGORIES, categories.map { it.name }.toTypedArray())
-    }
-
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        context.startForegroundService(intent)
-    } else {
-        context.startService(intent)
-    }
-}
-
-private fun stopTimer(context: Context) {
-    val intent = Intent(context, TimerService::class.java).apply {
-        action = TimerService.ACTION_STOP
-    }
-    context.startService(intent)
 }

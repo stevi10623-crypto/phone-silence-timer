@@ -4,9 +4,10 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import com.soundtimer.data.AndroidPreferencesManager
 import com.soundtimer.data.PreferencesManager
 import com.soundtimer.util.NotificationHelper
-import com.soundtimer.util.VolumeManager
+import com.soundtimer.util.AndroidVolumeController
 
 /**
  * Broadcast receiver that handles device boot completion.
@@ -18,7 +19,7 @@ class BootReceiver : BroadcastReceiver() {
         if (intent.action == Intent.ACTION_BOOT_COMPLETED ||
             intent.action == "android.intent.action.QUICKBOOT_POWERON") {
 
-            val preferencesManager = PreferencesManager(context)
+            val preferencesManager = AndroidPreferencesManager(context)
             val timerState = preferencesManager.getTimerState()
 
             if (timerState.isRunning) {
@@ -26,8 +27,8 @@ class BootReceiver : BroadcastReceiver() {
                     // Timer should have ended while device was off - restore volumes now
                     val volumeState = preferencesManager.getVolumeState()
                     if (volumeState != null) {
-                        val volumeManager = VolumeManager(context)
-                        volumeManager.restoreVolumes(volumeState, timerState.mutedCategories)
+                        val volumeController = AndroidVolumeController(context)
+                        volumeController.restoreVolumes(volumeState, timerState.mutedCategories)
                     }
 
                     // Show completion notification
