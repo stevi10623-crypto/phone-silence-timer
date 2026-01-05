@@ -43,7 +43,7 @@ fun SoundToggle(
 
     val label = when (category) {
         SoundCategory.RINGER -> "Calls"
-        SoundCategory.NOTIFICATION -> "Notifs"
+        SoundCategory.NOTIFICATION -> "Notifications"
         SoundCategory.MEDIA -> "Media"
         SoundCategory.ALARM -> "Alarm"
         SoundCategory.SYSTEM -> "System"
