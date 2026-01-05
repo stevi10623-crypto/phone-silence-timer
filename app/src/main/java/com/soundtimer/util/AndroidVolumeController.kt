@@ -14,7 +14,8 @@ class AndroidVolumeController(context: Context) : VolumeController {
             notificationVolume = audioManager.getStreamVolume(AudioManager.STREAM_NOTIFICATION),
             mediaVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC),
             alarmVolume = audioManager.getStreamVolume(AudioManager.STREAM_ALARM),
-            systemVolume = audioManager.getStreamVolume(AudioManager.STREAM_SYSTEM)
+            systemVolume = audioManager.getStreamVolume(AudioManager.STREAM_SYSTEM),
+            ringerMode = audioManager.ringerMode
         )
     }
 
@@ -25,6 +26,9 @@ class AndroidVolumeController(context: Context) : VolumeController {
     }
 
     override fun restoreVolumes(state: VolumeState, categories: Set<SoundCategory>) {
+        // Restore ringer mode first
+        audioManager.ringerMode = state.ringerMode
+
         categories.forEach { category ->
             val volume = when (category) {
                 SoundCategory.RINGER -> state.ringerVolume

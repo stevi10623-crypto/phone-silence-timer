@@ -21,7 +21,8 @@ data class VolumeState(
     val notificationVolume: Int = 0,
     val mediaVolume: Int = 0,
     val alarmVolume: Int = 0,
-    val systemVolume: Int = 0
+    val systemVolume: Int = 0,
+    val ringerMode: Int = 2 // AudioManager.RINGER_MODE_NORMAL
 ) {
     companion object {
         val EMPTY = VolumeState()

@@ -60,6 +60,7 @@ class AndroidPreferencesManager(context: Context) : PreferencesManager {
             putInt(KEY_VOLUME_MEDIA, state.mediaVolume)
             putInt(KEY_VOLUME_ALARM, state.alarmVolume)
             putInt(KEY_VOLUME_SYSTEM, state.systemVolume)
+            putInt(KEY_VOLUME_RINGER_MODE, state.ringerMode)
             putBoolean(KEY_VOLUME_SAVED, true)
         }
     }
@@ -73,7 +74,8 @@ class AndroidPreferencesManager(context: Context) : PreferencesManager {
             notificationVolume = prefs.getInt(KEY_VOLUME_NOTIFICATION, 0),
             mediaVolume = prefs.getInt(KEY_VOLUME_MEDIA, 0),
             alarmVolume = prefs.getInt(KEY_VOLUME_ALARM, 0),
-            systemVolume = prefs.getInt(KEY_VOLUME_SYSTEM, 0)
+            systemVolume = prefs.getInt(KEY_VOLUME_SYSTEM, 0),
+            ringerMode = prefs.getInt(KEY_VOLUME_RINGER_MODE, 2) // Default to NORMAL
         )
     }
 
@@ -137,6 +139,7 @@ class AndroidPreferencesManager(context: Context) : PreferencesManager {
         private const val KEY_VOLUME_MEDIA = "volume_media"
         private const val KEY_VOLUME_ALARM = "volume_alarm"
         private const val KEY_VOLUME_SYSTEM = "volume_system"
+        private const val KEY_VOLUME_RINGER_MODE = "volume_ringer_mode"
         private const val KEY_SELECTED_CATEGORIES = "selected_categories"
         private const val KEY_RECENT_DURATIONS = "recent_durations"
         private const val KEY_ONBOARDING_COMPLETE = "onboarding_complete"

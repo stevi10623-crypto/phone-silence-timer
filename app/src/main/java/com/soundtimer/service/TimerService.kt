@@ -75,9 +75,12 @@ class TimerService : Service() {
         // Cancel any existing countdown
         countdownJob?.cancel()
 
-        // Save current volumes before muting
-        val currentVolumes = volumeController.captureCurrentVolumes()
-        preferencesManager.saveVolumeState(currentVolumes)
+        // Save current volumes before muting, but only if we don't have a saved state already
+        // This prevents overwriting original volumes if the timer is extended/restarted while muted
+        if (preferencesManager.getVolumeState() == null) {
+            val currentVolumes = volumeController.captureCurrentVolumes()
+            preferencesManager.saveVolumeState(currentVolumes)
+        }
 
         // Mute selected categories
         volumeController.muteCategories(categories)
