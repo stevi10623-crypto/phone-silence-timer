@@ -2,6 +2,7 @@ package com.soundtimer.util
 
 import android.content.Context
 import android.media.AudioManager
+import android.util.Log
 import com.soundtimer.data.SoundCategory
 import com.soundtimer.data.VolumeState
 
