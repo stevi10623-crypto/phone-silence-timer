@@ -17,10 +17,156 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import com.soundtimer.data.SoundCategory
+
+/**
+ * Rich card for a saved preset.
+ */
+@Composable
+fun PresetCard(
+    title: String,
+    durationLabel: String,
+    icon: ImageVector,
+    iconColor: Color,
+    mutedCategories: Set<SoundCategory>,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Card(
+        modifier = modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(20.dp))
+            .clickable { onClick() },
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surface
+        ),
+        shape = RoundedCornerShape(20.dp),
+        border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.05f))
+    ) {
+        Column(
+            modifier = Modifier.padding(20.dp)
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    // Left Icon
+                    Box(
+                        modifier = Modifier
+                            .size(52.dp)
+                            .background(iconColor.copy(alpha = 0.15f), RoundedCornerShape(12.dp)),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            imageVector = icon,
+                            contentDescription = null,
+                            tint = iconColor,
+                            modifier = Modifier.size(24.dp)
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.width(16.dp))
+
+                    // Title & Duration
+                    Column {
+                        Text(
+                            text = title,
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                        Text(
+                            text = durationLabel,
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.primary
+                        )
+                    }
+                }
+
+                // Options Button
+                IconButton(onClick = { /* More options */ }) {
+                    Icon(
+                        imageVector = Icons.Rounded.MoreHoriz,
+                        contentDescription = "Options",
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            // Divider
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(1.dp)
+                    .background(MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f))
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Muted Channels Section
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                Text(
+                    text = "MUTED CHANNELS",
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
+                    fontWeight = FontWeight.Bold
+                )
+
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    SoundCategory.values().forEach { category ->
+                        val isMuted = mutedCategories.contains(category)
+                        val catIcon = when (category) {
+                            SoundCategory.RINGER -> Icons.Rounded.Call
+                            SoundCategory.NOTIFICATION -> Icons.Rounded.NotificationsOff
+                            SoundCategory.MEDIA -> Icons.Rounded.MusicNote
+                            SoundCategory.ALARM -> Icons.Rounded.Alarm
+                            SoundCategory.SYSTEM -> Icons.Rounded.Smartphone
+                        }
+                        
+                        val catColor = when (category) {
+                            SoundCategory.RINGER -> com.soundtimer.ui.theme.CategoryCalls
+                            SoundCategory.NOTIFICATION -> com.soundtimer.ui.theme.CategorySystem
+                            SoundCategory.MEDIA -> com.soundtimer.ui.theme.CategoryMedia
+                            SoundCategory.ALARM -> com.soundtimer.ui.theme.CategoryAlarms
+                            SoundCategory.SYSTEM -> com.soundtimer.ui.theme.CategorySystem
+                        }
+
+                        Box(
+                            modifier = Modifier
+                                .size(32.dp)
+                                .background(
+                                    if (isMuted) catColor.copy(alpha = 0.15f) else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f),
+                                    CircleShape
+                                ),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Icon(
+                                imageVector = catIcon,
+                                contentDescription = null,
+                                tint = if (isMuted) catColor else MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.3f),
+                                modifier = Modifier.size(16.dp)
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 
 /**
  * Toggle component for enabling/disabling a sound category.
@@ -34,54 +180,74 @@ fun SoundToggle(
     isTimerRunning: Boolean = false
 ) {
     val icon = when (category) {
-        SoundCategory.RINGER -> Icons.Rounded.Phone
-        SoundCategory.NOTIFICATION -> Icons.Rounded.Notifications
+        SoundCategory.RINGER -> Icons.Rounded.Call
+        SoundCategory.NOTIFICATION -> Icons.Rounded.NotificationsOff
         SoundCategory.MEDIA -> Icons.Rounded.MusicNote
         SoundCategory.ALARM -> Icons.Rounded.Alarm
-        SoundCategory.SYSTEM -> Icons.Rounded.Smartphone // Using Smartphone icon for System
+        SoundCategory.SYSTEM -> Icons.Rounded.Smartphone
     }
 
     val label = when (category) {
         SoundCategory.RINGER -> "Calls"
-        SoundCategory.NOTIFICATION -> "Notifications"
+        SoundCategory.NOTIFICATION -> "System"
         SoundCategory.MEDIA -> "Media"
-        SoundCategory.ALARM -> "Alarm"
-        SoundCategory.SYSTEM -> "System"
+        SoundCategory.ALARM -> "Alarms"
+        SoundCategory.SYSTEM -> "Device"
+    }
+
+    val description = when (category) {
+        SoundCategory.RINGER -> "Block incoming calls"
+        SoundCategory.NOTIFICATION -> "App notifications"
+        SoundCategory.MEDIA -> "Silence music & videos"
+        SoundCategory.ALARM -> "Only critical alerts"
+        SoundCategory.SYSTEM -> "Feedback sounds"
+    }
+
+    // Category-specific colors from Color.kt
+    val categoryColor = when (category) {
+        SoundCategory.RINGER -> com.soundtimer.ui.theme.CategoryCalls
+        SoundCategory.NOTIFICATION -> com.soundtimer.ui.theme.CategorySystem
+        SoundCategory.MEDIA -> com.soundtimer.ui.theme.CategoryMedia
+        SoundCategory.ALARM -> com.soundtimer.ui.theme.CategoryAlarms
+        SoundCategory.SYSTEM -> com.soundtimer.ui.theme.CategorySystem
+    }
+
+    val categoryColorBg = when (category) {
+        SoundCategory.RINGER -> com.soundtimer.ui.theme.CategoryCallsBg
+        SoundCategory.NOTIFICATION -> com.soundtimer.ui.theme.CategorySystemBg
+        SoundCategory.MEDIA -> com.soundtimer.ui.theme.CategoryMediaBg
+        SoundCategory.ALARM -> com.soundtimer.ui.theme.CategoryAlarmsBg
+        SoundCategory.SYSTEM -> com.soundtimer.ui.theme.CategorySystemBg
     }
 
     val backgroundColor by animateColorAsState(
-        targetValue = if (enabled) {
-            MaterialTheme.colorScheme.primaryContainer
-        } else {
-            MaterialTheme.colorScheme.surfaceVariant
-        },
+        targetValue = MaterialTheme.colorScheme.surface,
         animationSpec = tween(300),
         label = "backgroundColor"
     )
 
     val contentColor by animateColorAsState(
         targetValue = if (enabled) {
-            MaterialTheme.colorScheme.onPrimaryContainer
+            MaterialTheme.colorScheme.onSurface
         } else {
-            MaterialTheme.colorScheme.onSurfaceVariant
+            MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
         },
         animationSpec = tween(300),
         label = "contentColor"
     )
 
-    val scale by animateFloatAsState(
-        targetValue = if (enabled) 1f else 0.95f,
-        animationSpec = tween(200),
-        label = "scale"
-    )
-
     Card(
         modifier = modifier
-            .scale(scale)
+            .fillMaxWidth()
             .clip(RoundedCornerShape(16.dp))
             .clickable(enabled = !isTimerRunning) { onToggle(!enabled) },
         colors = CardDefaults.cardColors(containerColor = backgroundColor),
-        shape = RoundedCornerShape(16.dp)
+        shape = RoundedCornerShape(16.dp),
+        border = androidx.compose.foundation.BorderStroke(
+            1.dp, 
+            if (enabled) MaterialTheme.colorScheme.primary.copy(alpha = 0.3f) 
+            else MaterialTheme.colorScheme.outline.copy(alpha = 0.1f)
+        )
     ) {
         Row(
             modifier = Modifier
@@ -92,17 +258,13 @@ fun SoundToggle(
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 Box(
                     modifier = Modifier
-                        .size(40.dp)
+                        .size(44.dp)
                         .background(
-                            color = if (enabled) {
-                                MaterialTheme.colorScheme.primary
-                            } else {
-                                MaterialTheme.colorScheme.outline.copy(alpha = 0.3f)
-                            },
+                            color = categoryColorBg,
                             shape = CircleShape
                         ),
                     contentAlignment = Alignment.Center
@@ -110,20 +272,24 @@ fun SoundToggle(
                     Icon(
                         imageVector = icon,
                         contentDescription = label,
-                        tint = if (enabled) {
-                            MaterialTheme.colorScheme.onPrimary
-                        } else {
-                            MaterialTheme.colorScheme.onSurfaceVariant
-                        },
+                        tint = categoryColor,
                         modifier = Modifier.size(24.dp)
                     )
                 }
 
-                Text(
-                    text = label,
-                    style = MaterialTheme.typography.titleMedium,
-                    color = contentColor
-                )
+                Column {
+                    Text(
+                        text = label,
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = contentColor
+                    )
+                    Text(
+                        text = description,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
             }
 
             Switch(
@@ -131,10 +297,11 @@ fun SoundToggle(
                 onCheckedChange = { if (!isTimerRunning) onToggle(it) },
                 enabled = !isTimerRunning,
                 colors = SwitchDefaults.colors(
-                    checkedThumbColor = MaterialTheme.colorScheme.primary,
-                    checkedTrackColor = MaterialTheme.colorScheme.primaryContainer,
-                    uncheckedThumbColor = MaterialTheme.colorScheme.outline,
-                    uncheckedTrackColor = MaterialTheme.colorScheme.surfaceVariant
+                    checkedThumbColor = Color.White,
+                    checkedTrackColor = MaterialTheme.colorScheme.primary,
+                    uncheckedThumbColor = Color.White,
+                    uncheckedTrackColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.5f),
+                    uncheckedBorderColor = Color.Transparent
                 )
             )
         }

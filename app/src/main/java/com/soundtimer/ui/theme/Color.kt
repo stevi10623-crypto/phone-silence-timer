@@ -2,38 +2,60 @@ package com.soundtimer.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-// Light Theme Colors - Deep Blue
-val Blue40 = Color(0xFF1565C0)
-val BlueGrey40 = Color(0xFF546E7A)
-val Teal40 = Color(0xFF00796B)
+/**
+ * Premium Dark Theme - Slate & Violet Palette
+ * Based on user-provided HTML/Tailwind configuration.
+ */
 
-val Blue80 = Color(0xFF90CAF9)
-val BlueGrey80 = Color(0xFFB0BEC5)
-val Teal80 = Color(0xFF80CBC4)
+// Background & Surface - Slate
+val BackgroundSlate = Color(0xFF0F172A) // Slate 900
+val SurfaceSlate = Color(0xFF1E293B)    // Slate 800
+val BorderSlate = Color(0xFF334155)     // Slate 700
+
+// Primary - Violet
+val PrimaryViolet = Color(0xFF8B5CF6)   // Violet 500
+val PrimaryHover = Color(0xFF7C3AED)    // Violet 600
+
+// Gradient Button Colors (Violet -> Fuchsia)
+val GradientStart = Color(0xFF7C3AED)   // Violet 600
+val GradientEnd = Color(0xFFC026D3)     // Fuchsia 600
+
+// Category Colors (from HTML)
+val CategoryCalls = Color(0xFF0891B2)         // Cyan 600 (Icon)
+val CategoryCallsBg = Color(0x3306B6D4)       // Cyan 500/20% (Bg)
+
+val CategoryMedia = Color(0xFFC026D3)         // Fuchsia 600 (Icon)
+val CategoryMediaBg = Color(0x33D946EF)       // Fuchsia 500/20% (Bg)
+
+val CategoryAlarms = Color(0xFFD97706)        // Amber 600 (Icon)
+val CategoryAlarmsBg = Color(0x33F59E0B)      // Amber 500/20% (Bg)
+
+val CategorySystem = Color(0xFF059669)        // Emerald 600 (Icon)
+val CategorySystemBg = Color(0x3310B981)      // Emerald 500/20% (Bg)
+
+// Text Colors
+val TextWhite = Color(0xFFFFFFFF)
+val TextSlate400 = Color(0xFF94A3B8)
+val TextSlate500 = Color(0xFF64748B)
 
 // Status Colors
-val StatusNormal = Color(0xFF4CAF50)
-val StatusSilenced = Color(0xFFFF9800)
-val StatusSilencedDark = Color(0xFFFFB74D)
+val StatusNormal = Color(0xFF22C55E)
+val StatusSilenced = Color(0xFFF97316)
 
-// Surface Colors
-val SurfaceLight = Color(0xFFFAFAFA)
-val SurfaceDark = Color(0xFF121212)
-val OnSurfaceLight = Color(0xFF1C1B1F)
-val OnSurfaceDark = Color(0xFFE6E1E5)
+// Compatibility Layer (for current theme references)
+val Violet = PrimaryViolet
+val VioletLight = Color(0xFFA78BFA)
+val VioletDark = PrimaryHover
+val BackgroundDark = BackgroundSlate
+val SurfaceDark = SurfaceSlate
+val CardDark = SurfaceSlate
+val CardBorderDark = BorderSlate
+val TextPrimary = TextWhite
+val TextSecondary = TextSlate400
+val CardBackgroundLight = Color(0xFFF8FAFC)
+val CardBackgroundDark = SurfaceSlate
 
-// Background gradients - Deep Blue
-val GradientStart = Color(0xFF1565C0)
-val GradientEnd = Color(0xFF42A5F5)
-val GradientStartDark = Color(0xFF0D47A1)
-val GradientEndDark = Color(0xFF1565C0)
-
-// Card colors
-val CardBackgroundLight = Color(0xFFE3F2FD)
-val CardBackgroundDark = Color(0xFF1E1E1E)
-
-// Toggle colors
-val ToggleActiveLight = Color(0xFF1565C0)
-val ToggleActiveDark = Color(0xFF90CAF9)
-val ToggleInactiveLight = Color(0xFFE0E0E0)
-val ToggleInactiveDark = Color(0xFF424242)
+// Gradient references for screens
+val GradientViolet = GradientStart
+val GradientPink = GradientEnd
+val OnSurfaceDark = TextWhite

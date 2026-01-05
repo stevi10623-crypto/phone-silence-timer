@@ -12,6 +12,16 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.PlayArrow
 import androidx.compose.material.icons.rounded.Stop
 import androidx.compose.material.icons.rounded.Add
+import androidx.compose.material.icons.rounded.Restaurant
+import androidx.compose.material.icons.rounded.Work
+import androidx.compose.material.icons.rounded.Nightlight
+import androidx.compose.material.icons.rounded.MenuBook
+import androidx.compose.material.icons.rounded.FlashOn
+import androidx.compose.material.icons.rounded.MoreHoriz
+import androidx.compose.material.icons.rounded.ArrowForward
+import androidx.compose.material.icons.rounded.Close
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -26,8 +36,8 @@ import com.soundtimer.data.SoundCategory
 import com.soundtimer.data.TimerState
 import com.soundtimer.ui.TimerActionHandler
 import com.soundtimer.ui.components.*
-import com.soundtimer.ui.theme.GradientEnd
-import com.soundtimer.ui.theme.GradientStart
+import com.soundtimer.ui.theme.GradientPink
+import com.soundtimer.ui.theme.GradientViolet
 
 /**
  * Main timer screen with time picker, sound toggles, and countdown display.
@@ -70,13 +80,99 @@ fun TimerScreen(
                 title = {
                     Text(
                         text = "Phone Silence Timer",
-                        style = MaterialTheme.typography.headlineMedium
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.Bold
                     )
                 },
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.surface
+                    containerColor = MaterialTheme.colorScheme.background
                 )
             )
+        },
+        floatingActionButton = {
+            if (!isRunning) {
+                FloatingActionButton(
+                    onClick = { /* Add New Preset */ },
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    contentColor = Color.White,
+                    shape = CircleShape,
+                    modifier = Modifier.padding(bottom = 80.dp) // Avoid overlap with bottom bar
+                ) {
+                    Icon(Icons.Rounded.Add, contentDescription = "Add Preset")
+                }
+            }
+        },
+        bottomBar = {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(
+                        Brush.verticalGradient(
+                            colors = listOf(
+                                Color.Transparent,
+                                MaterialTheme.colorScheme.background.copy(alpha = 0.9f),
+                                MaterialTheme.colorScheme.background
+                            )
+                        )
+                    )
+                    .padding(16.dp)
+                    .padding(bottom = 16.dp)
+            ) {
+                Button(
+                    onClick = {
+                        if (isRunning) {
+                            actionHandler.stopTimer()
+                        } else {
+                            val durationMillis = (hours * 60L + minutes) * 60L * 1000L
+                            if (durationMillis > 0 && selectedCategories.isNotEmpty()) {
+                                actionHandler.startTimer(durationMillis, selectedCategories)
+                            }
+                        }
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(56.dp),
+                    shape = RoundedCornerShape(12.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color.Transparent
+                    ),
+                    contentPadding = PaddingValues()
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(
+                                brush = if (isRunning) {
+                                    Brush.horizontalGradient(listOf(MaterialTheme.colorScheme.error, MaterialTheme.colorScheme.error))
+                                } else {
+                                    Brush.horizontalGradient(
+                                        colors = listOf(
+                                            com.soundtimer.ui.theme.GradientStart,
+                                            com.soundtimer.ui.theme.GradientEnd
+                                        )
+                                    )
+                                },
+                                shape = RoundedCornerShape(12.dp)
+                            ),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Text(
+                                text = if (isRunning) "Stop Focus Session" else "Start Focus Session",
+                                style = MaterialTheme.typography.titleMedium,
+                                fontWeight = FontWeight.Bold,
+                                color = Color.White
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Icon(
+                                imageVector = if (isRunning) Icons.Rounded.Stop else Icons.Rounded.ArrowForward,
+                                contentDescription = null,
+                                tint = Color.White.copy(alpha = 0.9f)
+                            )
+                        }
+                    }
+                }
+            }
         }
     ) { paddingValues ->
         Column(
@@ -185,47 +281,92 @@ fun TimerScreen(
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            // Quick Presets
+            // My Presets Section
             if (!isRunning) {
-                Text(
-                    text = "Quick Presets",
-                    style = MaterialTheme.typography.titleSmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = "My Presets",
+                        style = MaterialTheme.typography.headlineSmall,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                    
+                    IconButton(
+                        onClick = { /* Add Preset */ },
+                        modifier = Modifier
+                            .size(32.dp)
+                            .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.1f), CircleShape)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Rounded.Add,
+                            contentDescription = "Add",
+                            tint = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.size(16.dp)
+                        )
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                // Preset Cards
+                PresetCard(
+                    title = "Deep Work",
+                    durationLabel = "45 min",
+                    icon = Icons.Rounded.Work,
+                    iconColor = Color(0xFF8B5CF6), // Violet
+                    mutedCategories = setOf(SoundCategory.NOTIFICATION, SoundCategory.SYSTEM),
+                    onClick = { hours = 0; minutes = 45 }
                 )
 
                 Spacer(modifier = Modifier.height(12.dp))
 
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    PresetButton(
-                        label = "15m",
-                        onClick = { hours = 0; minutes = 15 },
-                        modifier = Modifier.weight(1f),
-                        enabled = !isRunning
-                    )
-                    PresetButton(
-                        label = "30m",
-                        onClick = { hours = 0; minutes = 30 },
-                        modifier = Modifier.weight(1f),
-                        enabled = !isRunning
-                    )
-                    PresetButton(
-                        label = "1h",
-                        onClick = { hours = 1; minutes = 0 },
-                        modifier = Modifier.weight(1f),
-                        enabled = !isRunning
-                    )
-                    PresetButton(
-                        label = "2h",
-                        onClick = { hours = 2; minutes = 0 },
-                        modifier = Modifier.weight(1f),
-                        enabled = !isRunning
-                    )
-                }
+                PresetCard(
+                    title = "Sleep Mode",
+                    durationLabel = "8 hr 00 min",
+                    icon = Icons.Rounded.Nightlight,
+                    iconColor = Color(0xFF3B82F6), // Blue
+                    mutedCategories = setOf(SoundCategory.RINGER, SoundCategory.NOTIFICATION, SoundCategory.MEDIA, SoundCategory.SYSTEM),
+                    onClick = { hours = 8; minutes = 0 }
+                )
 
-                Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = Modifier.height(12.dp))
+
+                PresetCard(
+                    title = "Reading",
+                    durationLabel = "30 min",
+                    icon = Icons.Rounded.MenuBook,
+                    iconColor = Color(0xFF10B981), // Green
+                    mutedCategories = setOf(SoundCategory.NOTIFICATION, SoundCategory.MEDIA),
+                    onClick = { hours = 0; minutes = 30 }
+                )
+
+                Spacer(modifier = Modifier.height(12.dp))
+
+                PresetCard(
+                    title = "Power Nap",
+                    durationLabel = "20 min",
+                    icon = Icons.Rounded.FlashOn,
+                    iconColor = Color(0xFFF59E0B), // Amber
+                    mutedCategories = setOf(SoundCategory.NOTIFICATION),
+                    onClick = { hours = 0; minutes = 20 }
+                )
+
+                Spacer(modifier = Modifier.height(12.dp))
+
+                PresetCard(
+                    title = "Dinner Mode",
+                    durationLabel = "2 hr 00 min",
+                    icon = Icons.Rounded.Restaurant,
+                    iconColor = Color(0xFFEF4444), // Red
+                    mutedCategories = setOf(SoundCategory.RINGER, SoundCategory.NOTIFICATION),
+                    onClick = { hours = 2; minutes = 0 }
+                )
+
+                Spacer(modifier = Modifier.height(32.dp))
             }
 
             // Sound Category Section
@@ -287,58 +428,7 @@ fun TimerScreen(
 
             Spacer(modifier = Modifier.height(32.dp))
 
-            // Start/Stop Button
-            Box(
-                modifier = Modifier
-                    .size(100.dp)
-                    .scale(buttonScale)
-                    .clip(CircleShape)
-                    .background(
-                        brush = if (isRunning) {
-                            Brush.radialGradient(
-                                colors = listOf(
-                                    MaterialTheme.colorScheme.error,
-                                    MaterialTheme.colorScheme.error.copy(alpha = 0.8f)
-                                )
-                            )
-                        } else {
-                            Brush.radialGradient(
-                                colors = listOf(GradientStart, GradientEnd)
-                            )
-                        }
-                    ),
-                contentAlignment = Alignment.Center
-            ) {
-                IconButton(
-                    onClick = {
-                        if (isRunning) {
-                            actionHandler.stopTimer()
-                        } else {
-                            val durationMillis = (hours * 60L + minutes) * 60L * 1000L
-                            if (durationMillis > 0 && selectedCategories.isNotEmpty()) {
-                                actionHandler.startTimer(durationMillis, selectedCategories)
-                            }
-                        }
-                    },
-                    modifier = Modifier.fillMaxSize()
-                ) {
-                    Icon(
-                        imageVector = if (isRunning) Icons.Rounded.Stop else Icons.Rounded.PlayArrow,
-                        contentDescription = if (isRunning) "Stop Timer" else "Start Timer",
-                        tint = MaterialTheme.colorScheme.surface,
-                        modifier = Modifier.size(48.dp)
-                    )
-                }
-            }
-
-            Text(
-                text = if (isRunning) "Tap to Stop" else "Tap to Start",
-                style = MaterialTheme.typography.labelMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier.padding(top = 8.dp)
-            )
-
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(100.dp))
         }
     }
 }

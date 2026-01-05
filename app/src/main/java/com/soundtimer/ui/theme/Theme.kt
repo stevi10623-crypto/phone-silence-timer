@@ -2,40 +2,53 @@ package com.soundtimer.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.graphics.Color
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Blue80,
-    secondary = BlueGrey80,
-    tertiary = Teal80,
-    surface = SurfaceDark,
-    onSurface = OnSurfaceDark,
-    background = SurfaceDark,
-    onBackground = OnSurfaceDark,
-    surfaceVariant = CardBackgroundDark,
-    onSurfaceVariant = OnSurfaceDark
+    primary = PrimaryViolet,
+    onPrimary = Color.White,
+    primaryContainer = PrimaryHover,
+    onPrimaryContainer = Color.White,
+    secondary = CategoryCalls,
+    onSecondary = Color.White,
+    tertiary = CategorySystem,
+    onTertiary = Color.White,
+    surface = SurfaceSlate,
+    onSurface = Color.White,
+    background = BackgroundSlate,
+    onBackground = Color.White,
+    surfaceVariant = SurfaceSlate,
+    onSurfaceVariant = TextSlate400,
+    outline = BorderSlate
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Blue40,
-    secondary = BlueGrey40,
-    tertiary = Teal40,
-    surface = SurfaceLight,
-    onSurface = OnSurfaceLight,
-    background = SurfaceLight,
-    onBackground = OnSurfaceLight,
+    primary = PrimaryViolet,
+    onPrimary = Color.White,
+    primaryContainer = VioletLight,
+    onPrimaryContainer = BackgroundSlate,
+    secondary = CategoryCalls,
+    onSecondary = Color.White,
+    tertiary = CategorySystem,
+    surface = CardBackgroundLight,
+    onSurface = BackgroundSlate,
+    background = CardBackgroundLight,
+    onBackground = BackgroundSlate,
     surfaceVariant = CardBackgroundLight,
-    onSurfaceVariant = OnSurfaceLight
+    onSurfaceVariant = BackgroundSlate
 )
 
+@Suppress("UNUSED_PARAMETER")
 @Composable
 fun SoundTimerTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
+    darkTheme: Boolean = true, // Default to dark theme for this premium look
     content: @Composable () -> Unit
 ) {
-    val colorScheme = if (darkTheme) DarkColorScheme else LightColorScheme
+    // Always use dark theme for the premium aesthetic
+    val colorScheme = DarkColorScheme
 
     MaterialTheme(
         colorScheme = colorScheme,

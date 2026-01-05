@@ -1,43 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Primary Colors - Deep Blue -->
-    <color name="primary">#1565C0</color>
-    <color name="on_primary">#FFFFFF</color>
-    <color name="primary_container">#E3F2FD</color>
-    <color name="on_primary_container">#0D47A1</color>
-
-    <!-- Secondary Colors -->
-    <color name="secondary">#546E7A</color>
-    <color name="on_secondary">#FFFFFF</color>
-    <color name="secondary_container">#CFD8DC</color>
-    <color name="on_secondary_container">#263238</color>
-
-    <!-- Tertiary Colors -->
-    <color name="tertiary">#00796B</color>
-    <color name="on_tertiary">#FFFFFF</color>
-    <color name="tertiary_container">#B2DFDB</color>
-    <color name="on_tertiary_container">#004D40</color>
-
+    <!-- Premium Dark Theme - Based on slate/violet HTML specs -->
+    
+    <color name="background">#0F172A</color>
+    <color name="surface">#1E293B</color>
+    <color name="border">#334155</color>
+    
+    <color name="primary">#8B5CF6</color>
+    <color name="primary_hover">#7C3AED</color>
+    
+    <color name="gradient_start">#7C3AED</color>
+    <color name="gradient_end">#C026D3</color>
+    
+    <!-- Category Colors -->
+    <color name="category_calls">#0891B2</color>
+    <color name="category_calls_bg">#3306B6D4</color>
+    
+    <color name="category_media">#C026D3</color>
+    <color name="category_media_bg">#33D946EF</color>
+    
+    <color name="category_alarms">#D97706</color>
+    <color name="category_alarms_bg">#33F59E0B</color>
+    
+    <color name="category_system">#059669</color>
+    <color name="category_system_bg">#3310B981</color>
+    
+    <!-- Text Colors -->
+    <color name="text_white">#FFFFFF</color>
+    <color name="text_slate_400">#94A3B8</color>
+    <color name="text_slate_500">#64748B</color>
+    
     <!-- Status Colors -->
-    <color name="status_normal">#4CAF50</color>
-    <color name="status_silenced">#FF9800</color>
-    <color name="error">#B3261E</color>
+    <color name="status_normal">#22C55E</color>
+    <color name="status_silenced">#F97316</color>
+    <color name="error">#EF4444</color>
     <color name="on_error">#FFFFFF</color>
-
-    <!-- Background Colors -->
-    <color name="background">#FAFAFA</color>
-    <color name="on_background">#1C1B1F</color>
-    <color name="surface">#FAFAFA</color>
-    <color name="on_surface">#1C1B1F</color>
-
-    <!-- Dark Theme Colors -->
-    <color name="primary_dark">#90CAF9</color>
-    <color name="on_primary_dark">#0D47A1</color>
-    <color name="primary_container_dark">#1565C0</color>
-    <color name="on_primary_container_dark">#E3F2FD</color>
-
-    <color name="background_dark">#121212</color>
-    <color name="on_background_dark">#E6E1E5</color>
-    <color name="surface_dark">#121212</color>
-    <color name="on_surface_dark">#E6E1E5</color>
+    
+    <!-- Compatibility -->
+    <color name="on_background">#FFFFFF</color>
+    <color name="on_surface">#FFFFFF</color>
+    <color name="secondary">#8B5CF6</color>
+    <color name="on_secondary">#FFFFFF</color>
+    <color name="background_dark">#0F172A</color>
+    <color name="on_background_dark">#FFFFFF</color>
+    <color name="surface_dark">#1E293B</color>
+    <color name="on_surface_dark">#FFFFFF</color>
 </resources>
