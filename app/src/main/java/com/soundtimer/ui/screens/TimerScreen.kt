@@ -11,7 +11,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.PlayArrow
 import androidx.compose.material.icons.rounded.Stop
-import androidx.compose.material.icons.rounded.Add
+import androidx.compose.material.icons.rounded.MoreTime
 import androidx.compose.material.icons.rounded.Restaurant
 import androidx.compose.material.icons.rounded.Work
 import androidx.compose.material.icons.rounded.Nightlight
@@ -228,7 +228,7 @@ fun TimerScreen(
                             shape = RoundedCornerShape(24.dp)
                         ) {
                             Icon(
-                                imageVector = Icons.Rounded.Add,
+                                imageVector = Icons.Rounded.MoreTime,
                                 contentDescription = "Extend",
                                 modifier = Modifier.size(20.dp)
                             )

@@ -13,8 +13,8 @@ android {
         applicationId = "com.soundtimer"
         minSdk = 26
         targetSdk = 35
-        versionCode = 25
-        versionName = "2.2"
+        versionCode = 50
+        versionName = "3.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
