@@ -7,18 +7,18 @@ import androidx.compose.ui.graphics.Color
  * Based on user-provided HTML/Tailwind configuration.
  */
 
-// Background & Surface - Slate
-val BackgroundSlate = Color(0xFF0F172A) // Slate 900
-val SurfaceSlate = Color(0xFF1E293B)    // Slate 800
-val BorderSlate = Color(0xFF334155)     // Slate 700
+// Background & Surface - Midnight
+val BackgroundMidnight = Color(0xFF020617) // Slate 950
+val SurfaceSlate = Color(0xFF0F172A)    // Slate 900
+val BorderSlate = Color(0xFF1E293B)     // Slate 800
 
-// Primary - Violet
-val PrimaryViolet = Color(0xFF8B5CF6)   // Violet 500
-val PrimaryHover = Color(0xFF7C3AED)    // Violet 600
+// Primary - Teal
+val PrimaryTeal = Color(0xFF0D9488)   // Teal 600
+val PrimaryHover = Color(0xFF0F766E)    // Teal 700
 
-// Gradient Button Colors (Violet -> Fuchsia)
-val GradientStart = Color(0xFF7C3AED)   // Violet 600
-val GradientEnd = Color(0xFFC026D3)     // Fuchsia 600
+// Gradient Button Colors (Teal -> Sky)
+val GradientStart = Color(0xFF0D9488)   // Teal 600
+val GradientEnd = Color(0xFF0284C7)     // Sky 600
 
 // Category Colors (from HTML)
 val CategoryCalls = Color(0xFF0891B2)         // Cyan 600 (Icon)
@@ -43,10 +43,10 @@ val StatusNormal = Color(0xFF22C55E)
 val StatusSilenced = Color(0xFFF97316)
 
 // Compatibility Layer (for current theme references)
-val Violet = PrimaryViolet
-val VioletLight = Color(0xFFA78BFA)
-val VioletDark = PrimaryHover
-val BackgroundDark = BackgroundSlate
+val Teal = PrimaryTeal
+val TealLight = Color(0xFF2DD4BF)
+val TealDark = PrimaryHover
+val BackgroundDark = BackgroundMidnight
 val SurfaceDark = SurfaceSlate
 val CardDark = SurfaceSlate
 val CardBorderDark = BorderSlate
@@ -56,6 +56,6 @@ val CardBackgroundLight = Color(0xFFF8FAFC)
 val CardBackgroundDark = SurfaceSlate
 
 // Gradient references for screens
-val GradientViolet = GradientStart
-val GradientPink = GradientEnd
+val GradientTeal = GradientStart
+val GradientBlue = GradientEnd
 val OnSurfaceDark = TextWhite

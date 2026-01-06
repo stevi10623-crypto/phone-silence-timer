@@ -35,135 +35,110 @@ fun PresetCard(
     iconColor: Color,
     mutedCategories: Set<SoundCategory>,
     onClick: () -> Unit,
+    onCategoryToggle: (SoundCategory) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(20.dp))
+            .clip(RoundedCornerShape(16.dp))
             .clickable { onClick() },
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surface
         ),
-        shape = RoundedCornerShape(20.dp),
-        border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.05f))
+        shape = RoundedCornerShape(16.dp),
+        border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.1f))
     ) {
-        Column(
-            modifier = Modifier.padding(20.dp)
+        Row(
+            modifier = Modifier
+                .padding(12.dp)
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
+            // Compact Icon
+            Box(
+                modifier = Modifier
+                    .size(40.dp)
+                    .background(iconColor.copy(alpha = 0.1f), RoundedCornerShape(10.dp)),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    imageVector = icon,
+                    contentDescription = null,
+                    tint = iconColor,
+                    modifier = Modifier.size(20.dp)
+                )
+            }
+
+            // Title and Duration
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.titleSmall,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+                Text(
+                    text = durationLabel,
+                    style = MaterialTheme.typography.bodySmall,
+                    fontWeight = FontWeight.Medium,
+                    color = MaterialTheme.colorScheme.primary
+                )
+            }
+
+            // Interactive Muted Channels
             Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
+                horizontalArrangement = Arrangement.spacedBy(6.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    // Left Icon
+                SoundCategory.entries.forEach { category ->
+                    val isMuted = mutedCategories.contains(category)
+                    val catIcon = when (category) {
+                        SoundCategory.RINGER -> Icons.Rounded.Call
+                        SoundCategory.NOTIFICATION -> Icons.Rounded.NotificationsOff
+                        SoundCategory.MEDIA -> Icons.Rounded.MusicNote
+                        SoundCategory.ALARM -> Icons.Rounded.Alarm
+                        SoundCategory.SYSTEM -> Icons.Rounded.Smartphone
+                    }
+                    
+                    val catColor = when (category) {
+                        SoundCategory.RINGER -> com.soundtimer.ui.theme.CategoryCalls
+                        SoundCategory.NOTIFICATION -> com.soundtimer.ui.theme.CategorySystem
+                        SoundCategory.MEDIA -> com.soundtimer.ui.theme.CategoryMedia
+                        SoundCategory.ALARM -> com.soundtimer.ui.theme.CategoryAlarms
+                        SoundCategory.SYSTEM -> com.soundtimer.ui.theme.CategorySystem
+                    }
+
                     Box(
                         modifier = Modifier
-                            .size(52.dp)
-                            .background(iconColor.copy(alpha = 0.15f), RoundedCornerShape(12.dp)),
+                            .size(28.dp)
+                            .clip(CircleShape)
+                            .background(
+                                if (isMuted) catColor.copy(alpha = 0.15f) 
+                                else Color.Transparent
+                            )
+                            .clickable { onCategoryToggle(category) },
                         contentAlignment = Alignment.Center
                     ) {
                         Icon(
-                            imageVector = icon,
+                            imageVector = catIcon,
                             contentDescription = null,
-                            tint = iconColor,
-                            modifier = Modifier.size(24.dp)
+                            tint = if (isMuted) catColor else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f),
+                            modifier = Modifier.size(16.dp)
                         )
                     }
-
-                    Spacer(modifier = Modifier.width(16.dp))
-
-                    // Title & Duration
-                    Column {
-                        Text(
-                            text = title,
-                            style = MaterialTheme.typography.titleMedium,
-                            fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colorScheme.onSurface
-                        )
-                        Text(
-                            text = durationLabel,
-                            style = MaterialTheme.typography.titleMedium,
-                            fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colorScheme.primary
-                        )
-                    }
-                }
-
-                // Options Button
-                IconButton(onClick = { /* More options */ }) {
-                    Icon(
-                        imageVector = Icons.Rounded.MoreHoriz,
-                        contentDescription = "Options",
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
                 }
             }
-
-            Spacer(modifier = Modifier.height(20.dp))
-
-            // Divider
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(1.dp)
-                    .background(MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f))
+            
+            Icon(
+                imageVector = Icons.Rounded.ChevronRight,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f),
+                modifier = Modifier.size(20.dp)
             )
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            // Muted Channels Section
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                Text(
-                    text = "MUTED CHANNELS",
-                    style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
-                    fontWeight = FontWeight.Bold
-                )
-
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    SoundCategory.values().forEach { category ->
-                        val isMuted = mutedCategories.contains(category)
-                        val catIcon = when (category) {
-                            SoundCategory.RINGER -> Icons.Rounded.Call
-                            SoundCategory.NOTIFICATION -> Icons.Rounded.NotificationsOff
-                            SoundCategory.MEDIA -> Icons.Rounded.MusicNote
-                            SoundCategory.ALARM -> Icons.Rounded.Alarm
-                            SoundCategory.SYSTEM -> Icons.Rounded.Smartphone
-                        }
-                        
-                        val catColor = when (category) {
-                            SoundCategory.RINGER -> com.soundtimer.ui.theme.CategoryCalls
-                            SoundCategory.NOTIFICATION -> com.soundtimer.ui.theme.CategorySystem
-                            SoundCategory.MEDIA -> com.soundtimer.ui.theme.CategoryMedia
-                            SoundCategory.ALARM -> com.soundtimer.ui.theme.CategoryAlarms
-                            SoundCategory.SYSTEM -> com.soundtimer.ui.theme.CategorySystem
-                        }
-
-                        Box(
-                            modifier = Modifier
-                                .size(32.dp)
-                                .background(
-                                    if (isMuted) catColor.copy(alpha = 0.15f) else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f),
-                                    CircleShape
-                                ),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Icon(
-                                imageVector = catIcon,
-                                contentDescription = null,
-                                tint = if (isMuted) catColor else MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.3f),
-                                modifier = Modifier.size(16.dp)
-                            )
-                        }
-                    }
-                }
-            }
         }
     }
 }

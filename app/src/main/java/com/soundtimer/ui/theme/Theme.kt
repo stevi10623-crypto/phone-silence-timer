@@ -8,9 +8,9 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 
 private val DarkColorScheme = darkColorScheme(
-    primary = PrimaryViolet,
+    primary = PrimaryTeal,
     onPrimary = Color.White,
-    primaryContainer = PrimaryHover,
+    primaryContainer = PrimaryHover.copy(alpha = 0.3f),
     onPrimaryContainer = Color.White,
     secondary = CategoryCalls,
     onSecondary = Color.White,
@@ -18,7 +18,7 @@ private val DarkColorScheme = darkColorScheme(
     onTertiary = Color.White,
     surface = SurfaceSlate,
     onSurface = Color.White,
-    background = BackgroundSlate,
+    background = BackgroundMidnight,
     onBackground = Color.White,
     surfaceVariant = SurfaceSlate,
     onSurfaceVariant = TextSlate400,
@@ -26,19 +26,19 @@ private val DarkColorScheme = darkColorScheme(
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = PrimaryViolet,
+    primary = PrimaryTeal,
     onPrimary = Color.White,
-    primaryContainer = VioletLight,
-    onPrimaryContainer = BackgroundSlate,
+    primaryContainer = TealLight,
+    onPrimaryContainer = BackgroundMidnight,
     secondary = CategoryCalls,
     onSecondary = Color.White,
     tertiary = CategorySystem,
     surface = CardBackgroundLight,
-    onSurface = BackgroundSlate,
+    onSurface = BackgroundMidnight,
     background = CardBackgroundLight,
-    onBackground = BackgroundSlate,
+    onBackground = BackgroundMidnight,
     surfaceVariant = CardBackgroundLight,
-    onSurfaceVariant = BackgroundSlate
+    onSurfaceVariant = BackgroundMidnight
 )
 
 @Suppress("UNUSED_PARAMETER")
