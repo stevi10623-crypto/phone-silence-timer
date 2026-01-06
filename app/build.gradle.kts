@@ -13,7 +13,7 @@ android {
         applicationId = "com.soundtimer"
         minSdk = 26
         targetSdk = 35
-        versionCode = 14
+        versionCode = 20
         versionName = "2.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
