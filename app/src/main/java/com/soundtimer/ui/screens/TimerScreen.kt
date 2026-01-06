@@ -162,19 +162,6 @@ fun TimerScreen(
                 }
             }
         },
-        floatingActionButton = {
-            if (!isRunning && selectedTab == 1) {
-                FloatingActionButton(
-                    onClick = { /* Add New Preset */ },
-                    containerColor = MaterialTheme.colorScheme.primary,
-                    contentColor = Color.White,
-                    shape = CircleShape,
-                    modifier = Modifier.padding(bottom = 80.dp) // Avoid overlap with bottom bar
-                ) {
-                    Icon(Icons.Rounded.Add, contentDescription = "Add Preset")
-                }
-            }
-        }
     ) { paddingValues ->
         Column(
             modifier = modifier
